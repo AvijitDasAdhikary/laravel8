@@ -20,7 +20,7 @@
         records doesn't exixts!
     @endempty
     <hr>
-    @switch($i)
+    @switch($value)
         @case(1)
             First Case...
             @break
@@ -33,13 +33,83 @@
             Default Case...
     @endswitch
     <hr>
-    @for ($i = 0; $i < 1; $i++)
-        The current value is {{ $i }}
+    @for ($i = 0; $i < $value; $i++)
+        <p>The current value is {{ $i }}</p>
     @endfor
     <hr>
-    @foreach($users as $user)
-        <p>This is user {{ $user->id }}</p>
+    @foreach ($users as $user)
+        <p>This is user {{ $user['id'] }}</p>
     @endforeach
-    
+    <hr>
+    @forelse ($admins as $admin)
+        <p>{{ $admin['name'] }}</p>
+    @empty
+        <p>Admin Present!!</p>
+    @endforelse
+    <hr>
+    <div style="width:50%; float:left">
+        <h4>1st Method</h4>
+        @foreach ($users as $user)
+            @if($user['id'] == 1)
+                @continue
+            @endif
+            <p>{{ $user['code']}}</p>
+            @if($user['age']== 62)
+                @break
+            @endif
+        @endforeach
+    </div>
+    <div style="width:50%; float:left">
+        <h4>2nd Method</h4>
+        @foreach($users as $user)
+            @continue($user['id'] ==3)
+            <p>{{ $user['code'] }}</p>
+            @break($user['age'] == 52)
+        @endforeach    
+    </div>
+    <hr>
+    <h4>Loop Variables</h4>
+    <div style="width:100%; float:left">
+        @foreach($users as $user)
+        @if ($loop->first)
+                This is first iteration
+            @endif
+
+            @if ($loop->last)
+                This is last iteration
+            @endif
+            <p>This is user {{ $user['id'] }}</p>
+        @endforeach
+        <hr>
+        @foreach ($users as $user)
+            @foreach ($user as $u)
+                @if ($loop->parent->first)
+                    <p>This is first iteration of the parent loop</p>
+                @endif
+            @endforeach
+        @endforeach
+    </div>
+    <hr>
+    <div style="width:100%; float:left">
+        @foreach($users as $user)
+            @if($loop->first)
+                <p>Total Number of items in the array is {{ $loop->count }}</p>
+                <p>This is First iteration</p>
+                <p>{{ $loop->remaining }} loops remaining</p>
+            @endif
+
+            @if($loop->index < 2)
+                <p>The index of current loop is {{ $loop->index }}</p>
+            @endif
+
+
+        @endforeach
+    </div>
+    <hr>
+    <h3>Sub Views</h3>
+    @foreach($users as $user)
+        @each('index',$user, 'user')
+    @endforeach
+    <hr>
 </body>
 </html>

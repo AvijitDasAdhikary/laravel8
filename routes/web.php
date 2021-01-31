@@ -18,4 +18,6 @@ use Illuminate\Support\Facades\Route;
 // });
 
 Route::get('/dashboard','DashboardController@index');
+Route::get('/task','DashboardController@task');
+
 
