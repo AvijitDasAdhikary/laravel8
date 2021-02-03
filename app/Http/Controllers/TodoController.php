@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Todo;
-
+use Redirect,Response;
 
 
 class TodoController extends Controller
@@ -28,7 +28,7 @@ class TodoController extends Controller
      */
     public function create()
     {
-        //
+        return view('todos.createTodo');
     }
 
     /**
@@ -39,7 +39,14 @@ class TodoController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $todos = new Todo();
+
+        $todos->name = $request->todoName;
+        $todos->status = $request->todoStatus;
+        $todos->save();
+
+        return redirect('todos');
+
     }
 
     /**
@@ -91,6 +98,8 @@ class TodoController extends Controller
      */
     public function destroy($id)
     {
-        //
-    }
+        $todos = Todo::findOrFail($id);
+        $todos->delete();
+
+        return Response::json(array('success' => true), 200);    }
 }
