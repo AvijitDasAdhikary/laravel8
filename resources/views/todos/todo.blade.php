@@ -22,33 +22,56 @@
     <div class="col-12">
         <div class="card rounded-0">
             <div class="card-body">
-                <table class="table table-sm table-bordered table-hover" id="todoList">
-                    <thead>
-                        <tr>
-                            <th class="bg-info">Name</th>
-                            <th class="bg-info">Status</th>
-                            <th class="bg-info">Action</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach($todos as $todo)
+                <div class="container" style="margin-top:35px">
+                    <h4>Select Number of Rows</h4>
+                    <div class="form-group">
+                        <select name="maxRows" id="maxRows" class="form-control"  style="width:150px;">
+                            <option value="">Show All</option>
+                            <option value="5">5</option>
+                            <option value="10">10</option>
+                            <option value="15">15</option>
+                        </select>
+                    </div>
+                
+                    <table class="table table-sm table-bordered table-hover" id="todoList">
+                        <thead>
                             <tr>
-                                <td>{{ $todo->name }}</td>
-                                <td>
-                                    @if($todo->status == 1)
-                                        <span class="btn btn-success btn-sm rounded-0">Active</span>
-                                    @elseif($todo->status == 0)
-                                        <span class="btn btn-warning btn-sm rounded-0">Inactive</span>
-                                    @endif
-                                </td>
-                                <td>
-                                    <a href="/todos/{{ $todo->id }}/edit" class="btn btn-sm btn-primary rounded-0">Edit</a>
-                                    <button type="button" class="btn btn-sm btn-danger rounded-0" onclick="deletedData({{ $todo->id }});">Delete</button>
-                                </td>
+                                
+                                <th class="bg-info">Name</th>
+                                <th class="bg-info">Status</th>
+                                <th class="bg-info">Action</th>
                             </tr>
-                        @endforeach 
-                    </tbody>
-                </table>
+                        </thead>
+                        <tbody>
+                            @foreach($todos as $todo)
+                                <tr>
+                                    
+                                    <td>{{ $todo->name }}</td>
+                                    <td>
+                                        @if($todo->status == 1)
+                                            <span class="btn btn-success btn-sm rounded-0">Active</span>
+                                        @elseif($todo->status == 0)
+                                            <span class="btn btn-warning btn-sm rounded-0">Inactive</span>
+                                        @endif
+                                    </td>
+                                    <td>
+                                        <a href="/todos/{{ $todo->id }}/edit" class="btn btn-sm btn-primary rounded-0">Edit</a>
+                                        <button type="button" class="btn btn-sm btn-danger rounded-0" onclick="deletedData({{ $todo->id }});">Delete</button>
+                                    </td>
+                                </tr>
+                            @endforeach 
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="card-footer pagination-container">
+                <ul class="pagination float-right">
+                    <!-- <li class="page-item"><a class="page-link" href="#">Previous</a></li>
+                    <li class="page-item active"><a class="page-link" href="#">1</a></li>
+                    <li class="page-item"><a class="page-link" href="#">2</a></li>
+                    <li class="page-item"><a class="page-link" href="#">3</a></li>
+                    <li class="page-item"><a class="page-link" href="#">Next</a></li> -->
+                </ul>
             </div>
         </div>
     </div>
@@ -59,7 +82,7 @@
 
 @stop
 
-@section('plugins.Datatables', true)
+<!-- @section('plugins.Datatables', true) -->
 @section('plugins.Sweetalert2', true)
 
 @section('js')
@@ -69,14 +92,14 @@
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
         }
     });
-    $(function() {
-        $('#todoList').DataTable({
-            responsive: true,
-            columnDefs: [
-                { orderable: false, targets: 2 },
-            ]
-        });
-    });
+    // $(function() {
+    //     $('#todoList').DataTable({
+    //         responsive: true,
+    //         columnDefs: [
+    //             { orderable: false, targets: 2 },
+    //         ]
+    //     });
+    // });
 
     function deletedData(id){
         swal.fire({
@@ -111,5 +134,43 @@
             }
         });
     }
+
+    var table = '#todoList'
+    $('#maxRows').on('change',function(){
+        $('.pagination').html('')
+        var trnum = 0
+        var maxRows = parseInt($(this).val())
+        var totalRows = $(table+' tbody tr').length
+        $(table+' tr:gt(0)').each(function(){
+            trnum++
+            if(trnum > maxRows){
+                $(this).hide()
+            }
+            if(trnum <= maxRows){
+                $(this).show()
+            }
+        })
+        if(totalRows > maxRows){
+            var pagenum = Math.ceil(totalRows/maxRows)
+            for(var i=1; i<=pagenum;){
+                $('.pagination').append('<li class="page-item" data-page="'+i+'">\<span class="page-link">'+ i++ +'<span class="sr-only">(current)</span></span>\</li>').show()
+            }
+        }
+        $('.pagination li:first-child').addClass('active')
+        $('.pagination li').on('click',function(){
+            var pagenum = $(this).attr('data-page')
+            var trIndex = 0;
+            $('.pagination li').removeClass('active')
+            $(this).addClass('active')
+            $(table+' tr:gt(0)').each(function(){
+                trIndex++
+                if(trIndex > (maxRows*pagenum) || trIndex <= ((maxRows*pagenum)-maxRows)){
+                    $(this).hide()
+                }else{
+                    $(this).show()
+                }
+            })
+        })
+    })
 </script>
 @stop
