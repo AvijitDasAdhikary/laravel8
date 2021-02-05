@@ -17,7 +17,8 @@ class TodoController extends Controller
      */
     public function index()
     {
-        $todos = Todo::get();
+        // $todos = Todo::get();
+        $todos = Todo::paginate(5);
         return view('todos.todo', compact('todos'));
     }
 
@@ -101,5 +102,6 @@ class TodoController extends Controller
         $todos = Todo::findOrFail($id);
         $todos->delete();
 
-        return Response::json(array('success' => true), 200);    }
+        return Response::json(array('success' => true), 200);   
+    }
 }
