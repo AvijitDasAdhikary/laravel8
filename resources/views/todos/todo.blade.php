@@ -7,7 +7,7 @@
     <div class="row mb-2">
         <div class="col-sm-6">
             <h1 class="d-inline">Todo Lists</h1>
-            <a href="todos/create" class="btn btn-info btn-sm btn-flat d-inline-block ml-2 mt-n2 elevation-2 text-white">Add Todo</a>
+            <a href="/todos/create" class="btn btn-info btn-sm btn-flat d-inline-block ml-2 mt-n2 elevation-2 text-white">Add Todo</a>
         </div>
         <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
@@ -36,6 +36,7 @@
                         <thead>
                             <tr>
                                 <th class="bg-info">Name</th>
+                                <th class="bg-info">Image</th>
                                 <th class="bg-info">Status</th>
                                 <th class="bg-info">Action</th>
                             </tr>
@@ -44,6 +45,7 @@
                             @foreach($todos as $todo)
                                 <tr>
                                     <td>{{ $todo->name }}</td>
+                                    <td><img src="{{ $todo->image }}" width=50 height=50></td>
                                     <td>
                                         @if($todo->status == 1)
                                             <span class="btn btn-success btn-sm rounded-0">Active</span>
@@ -74,7 +76,7 @@
             {{-- Pagination --}}
             <div class="card-footer">
                 <ul class="pagination float-right">
-                    {!! $todos->links() !!}
+                    {!! $todos->links("pagination::bootstrap-4") !!}
                 </ul>
             </div>
         </div>

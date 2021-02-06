@@ -2,11 +2,10 @@
 
 namespace App\Http\Controllers;
 
-
 use Illuminate\Http\Request;
 use App\Models\Todo;
 use Redirect,Response;
-
+use Validator;
 
 class TodoController extends Controller
 {
@@ -40,10 +39,33 @@ class TodoController extends Controller
      */
     public function store(Request $request)
     {
-        $todos = new Todo();
+        $validator = Validator::make($request->all(),[
+            'todoName'  =>  'required',
+        ],[
+            'todoName.required' => 'Please select TodoName',
+        ]);
 
+        if ($validator->fails())
+        {
+            return Response::json(array(
+                'success' => false,
+                'errors' => $validator->getMessageBag()->toArray()
+            ), 400);
+        }
+        $todos = new Todo();
         $todos->name = $request->todoName;
         $todos->status = $request->todoStatus;
+        if ($request->hasFile('inputImage')) {
+            $document = $request->file('inputImage');
+            $documentExtension = $document->getClientOriginalExtension();
+            $documentName = time() . '.' . $documentExtension;
+            $path = 'uploads/'.date('Y').'/'.date('m').'/'.date('d').'/'.$request->permitType.'/'.$request->permitDetailsId;
+            $document->move(public_path($path), $documentName);
+            $dbDocumentPath = $path.'/'.$documentName;
+        }else{
+            $dbDocumentPath = '';
+        }
+        $todos->image = $dbDocumentPath;
         $todos->save();
 
         return redirect('todos');
