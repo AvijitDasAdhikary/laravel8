@@ -59,7 +59,7 @@ class TodoController extends Controller
             $document = $request->file('inputImage');
             $documentExtension = $document->getClientOriginalExtension();
             $documentName = time() . '.' . $documentExtension;
-            $path = 'uploads/'.date('Y').'/'.date('m').'/'.date('d').'/'.$request->permitType.'/'.$request->permitDetailsId;
+            $path = 'uploads/'.date('Y').'/'.date('m').'/'.date('d');
             $document->move(public_path($path), $documentName);
             $dbDocumentPath = $path.'/'.$documentName;
         }else{

@@ -32,18 +32,20 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="form-group row">
+                        <div class="row">
                             <div class="col-md-4">
-                                <label for="inputImage">Image</label>
-                                <div class="input-group input-group-sm">
-                                    <div class="custom-file">
-                                        <input type="file" class="custom-file-input form-control-sm" name="inputImage" id="inputImage" onchange="setPreview(this,'close_1');">
-                                        <label class="custom-file-label" for="inputImage">Choose Image</label>
+                                <div class="form-group">
+                                    <label for="inputImage">Image</label>
+                                    <div class="input-group">
+                                        <div class="custom-file">
+                                            <input type="file" class="custom-file-input form-control-sm" name="inputImage" id="inputImage" onchange="setPreview(this,'close_1');">
+                                            <label class="custom-file-label" for="inputImage">Choose Image</label>
+                                        </div>
+                                        <div class="img-wrap" >
+                                            <span class="img-close" id="close_1" onClick="removeImage(1)">&times;</span>
+                                        </div>
+                                        <img id="preview_1" src="{{ asset('dist/img/preview.png') }}" height="48px" width="48px" alt="No Image" style="margin-top: -8px;" />
                                     </div>
-                                    <div class="img-wrap" >
-                                        <span class="img-close" id="close_1" onClick="removeImage(1)">&times;</span>
-                                    </div>
-                                    <img id="preview_1" src="{{ asset('dist/img/preview.png') }}" height="48px" width="48px" alt="No Image" style="margin-top: -8px;" />
                                 </div>
                             </div>
                         </div>
@@ -96,6 +98,21 @@
             </div>
         </div>
     </div>
+@stop
+
+@section('css')
+    <link type="text/css" rel="stylesheet" href="{{ asset('dist/custom/my.css') }}">
+    <!-- <link rel="stylesheet" href="{{ URL::asset('plugins/jquery-ui/jquery-ui.min.css') }}"> -->
+
+    <style type="text/css">
+        .input-group>.custom-file {height: calc(1.8125rem + 2px) !important;}
+        .custom-file-label {height: calc(1.8125rem + 2px) !important;border-radius: 0 !important;line-height: 1rem;}
+        .custom-file-label::after {height: calc(1.7rem + 2px) !important;line-height: 1.25 !important;}
+        .img-wrap .img-close{top: 8px;right: -40px;}
+
+        .ui-autocomplete-loading { background: white url("../../dist/img/ui-anim_basic_16x16.gif") right center no-repeat;}
+        ul.ui-autocomplete { z-index: 1100; }
+    </style>
 @stop
 
 @section('js')
