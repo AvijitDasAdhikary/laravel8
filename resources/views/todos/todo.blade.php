@@ -37,6 +37,7 @@
                             <tr>
                                 <th class="bg-info">Name</th>
                                 <th class="bg-info">Image</th>
+                                <th class="bg-info">Created At</th>
                                 <th class="bg-info">Status</th>
                                 <th class="bg-info">Action</th>
                             </tr>
@@ -46,6 +47,7 @@
                                 <tr>
                                     <td>{{ $todo->name }}</td>
                                     <td><img src="{{ $todo->image }}" width=50 height=50></td>
+                                    <td>{{ $todo->created_at }}</td>
                                     <td>
                                         @if($todo->status == 1)
                                             <span class="btn btn-success btn-sm rounded-0">Active</span>
@@ -94,84 +96,82 @@
 @section('js')
 
 <script>
-    $.ajaxSetup({
-        headers: {
-            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-        }
-    });
-
-    function deletedData(id){
-        swal.fire({
-            title: "Are you sure?",
-            text: "Deleted data can't undone!!",
-            type: 'warning',
-            showCancelButton: true,
-            confirmButtonText: "Yes, I'm sure!",
-            cancelButtonText: "No, I'm not sure!",
-            confirmButtonColor: '#00802b',
-            cancelButtonColor: '#cc3300'
-        }).then((willDelete) => {
-            if (willDelete.value) {
-                $.ajax({
-                    url: "/todos/"+id,
-                    type: "DELETE",
-                    success: function(response){
-                        console.log(response)
-                        if(response.success == true){
-                            swal.fire({
-                                icon: "success",
-                                title: "Deleted Done!!",
-                                type: 'success'
-                            }).then((willDelete) => {
-                                if(willDelete.value){
-                                    window.location = "{{ url('todos') }}"
-                                }
-                            })
-                        }
-                    }
-                });
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             }
         });
-    }
 
-    //var table = '#todoList'
-    // $('#maxRows').on('change',function(){
-    //     $('.pagination').html('')
-    //     var trnum = 0
-    //     var maxRows = parseInt($(this).val())
-    //     var totalRows = $(table+' tbody tr').length
-    //     $(table+' tr:gt(0)').each(function(){
-    //         trnum++
-    //         if(trnum > maxRows){
-    //             $(this).hide()
-    //         }
-    //         if(trnum <= maxRows){
-    //             $(this).show()
-    //         }
-    //     })
-    //     if(totalRows > maxRows){
-    //         var pagenum = Math.ceil(totalRows/maxRows)
-    //         for(var i=1; i<=pagenum;){
-    //             $('.pagination').append('<li class="page-item" data-page="'+i+'">\<span class="page-link">'+ i++ +'<span class="sr-only">(current)</span></span>\</li>').show()
-    //         }
-    //     }
-    //     $('.pagination li:first-child').addClass('active')
-    //     $('.pagination li').on('click',function(){
-    //         var pagenum = $(this).attr('data-page')
-    //         var trIndex = 0;
-    //         $('.pagination li').removeClass('active')
-    //         $(this).addClass('active')
-    //         $(table+' tr:gt(0)').each(function(){
-    //             trIndex++
-    //             if(trIndex > (maxRows*pagenum) || trIndex <= ((maxRows*pagenum)-maxRows)){
-    //                 $(this).hide()
-    //             }else{
-    //                 $(this).show()
-    //             }
-    //         })
-    //     })
-    // })
+        function deletedData(id){
+            swal.fire({
+                title: "Are you sure?",
+                text: "Deleted data can't undone!!",
+                type: 'warning',
+                showCancelButton: true,
+                confirmButtonText: "Yes, I'm sure!",
+                cancelButtonText: "No, I'm not sure!",
+                confirmButtonColor: '#00802b',
+                cancelButtonColor: '#cc3300'
+            }).then((willDelete) => {
+                if (willDelete.value) {
+                    $.ajax({
+                        url: "/todos/"+id,
+                        type: "DELETE",
+                        success: function(response){
+                            console.log(response)
+                            if(response.success == true){
+                                swal.fire({
+                                    icon: "success",
+                                    title: "Deleted Done!!",
+                                    type: 'success'
+                                }).then((willDelete) => {
+                                    if(willDelete.value){
+                                        window.location = "{{ url('todos') }}"
+                                    }
+                                })
+                            }
+                        }
+                    });
+                }
+            });
+        }
 
-
+        // var table = '#todoList'
+        // $('#maxRows').on('change',function(){
+        //     $('.pagination').html('')
+        //     var trnum = 0
+        //     var maxRows = parseInt($(this).val())
+        //     var totalRows = $(table+' tbody tr').length
+        //     $(table+' tr:gt(0)').each(function(){
+        //         trnum++
+        //         if(trnum > maxRows){
+        //             $(this).hide()
+        //         }
+        //         if(trnum <= maxRows){
+        //             $(this).show()
+        //         }
+        //     })
+        //     if(totalRows > maxRows){
+        //         var pagenum = Math.ceil(totalRows/maxRows)
+        //         for(var i=1; i<=pagenum;){
+        //             $('.pagination').append('<li class="page-item" data-page="'+i+'">\<span class="page-link">'+ i++ +'<span class="sr-only">(current)</span></span>\</li>').show()
+        //         }
+        //     }
+        //     $('.pagination li:first-child').addClass('active')
+        //     $('.pagination li').on('click',function(){
+        //         var pagenum = $(this).attr('data-page')
+        //         var trIndex = 0;
+        //         $('.pagination li').removeClass('active')
+        //         $(this).addClass('active')
+        //         $(table+' tr:gt(0)').each(function(){
+        //             trIndex++
+        //             if(trIndex > (maxRows*pagenum) || trIndex <= ((maxRows*pagenum)-maxRows)){
+        //                 $(this).hide()
+        //             }else{
+        //                 $(this).show()
+        //             }
+        //         })
+        //     })
+        // })
 </script>
 @stop

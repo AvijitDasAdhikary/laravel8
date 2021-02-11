@@ -34,6 +34,12 @@
                         </div>
                         <div class="row">
                             <div class="col-md-4">
+                                <label for="todoimage">Image</label>
+                                
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-4">
                                 <div class="form-group">
                                     <label for="todoStatus">Status</label>
                                     <select name="todoStatus" id="todoStatus" class="form-control rounded-0">
