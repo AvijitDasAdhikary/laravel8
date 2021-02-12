@@ -16,6 +16,7 @@ use Illuminate\Support\Facades\Route;
 // Route::get('/', function () {
 //     return view('welcome');
 // });
+Route::get('/home','DeveloperController@index');
 
 Route::get('/dashboard','DashboardController@index');
 Route::get('/task','DashboardController@task');
@@ -25,6 +26,6 @@ Route::get('/developer','DeveloperController@index');
 Route::resources([
     'photos' => PhotoController::class,
     'todos' => TodoController::class,
+    'departments' => DepartmentController::class,
 ]);
-
 
