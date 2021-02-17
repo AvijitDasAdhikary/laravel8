@@ -248,6 +248,20 @@ return [
             // 'label'       => 4,
             'label_color' => 'success',
         ],
+        [
+            'text'        => 'Master Form Option',
+            'url'         => 'masterformoptions',
+            'icon'        => 'fas fa-bars',
+            // 'label'       => 4,
+            'label_color' => 'success',
+        ],
+        [
+            'text'        => 'Form Codes',
+            'url'         => 'formcodes',
+            'icon'        => 'fas fa-chart-pie',
+            // 'label'       => 4,
+            'label_color' => 'success',
+        ],
         // ['header' => 'account_settings'],
         // [
         //     'text' => 'profile',

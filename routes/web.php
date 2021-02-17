@@ -27,5 +27,7 @@ Route::resources([
     'photos' => PhotoController::class,
     'todos' => TodoController::class,
     'departments' => DepartmentController::class,
+    'masterformoptions' => MasterFormOptionsController::class,
+    'formcodes' => FormCodesController::class,
 ]);
 

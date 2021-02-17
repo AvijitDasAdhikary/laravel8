@@ -3,11 +3,11 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Department;
+use App\Models\masterFormOptions;
 use Redirect,Response;
 use Illuminate\Support\Facades\Validator;
 
-class DepartmentController extends Controller
+class MasterFormOptionsController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,8 +16,8 @@ class DepartmentController extends Controller
      */
     public function index()
     {
-        $departments = Department::get();
-        return view('departments.view', compact('departments'));
+        $masterformoptions = masterFormOptions::get();
+        return view('master_form_options.view', compact('masterformoptions'));
 
     }
 
@@ -28,7 +28,7 @@ class DepartmentController extends Controller
      */
     public function create()
     {
-        return view('departments.create');
+        return view('master_form_options.create');
     }
 
     /**
@@ -40,28 +40,24 @@ class DepartmentController extends Controller
     public function store(Request $request)
     {
         Validator::make($request->all(),[
-            'departmentName' => 'required',
-            'departmentAlias' => 'required',
-            'departmentDescription' => 'required',
+            'masterFormLabel' => 'required',
         ])->validate();
 
-        $departments = new Department();
-        $departments->name = $request->departmentName;
-        $departments->alias = $request->departmentAlias;
-        $departments->description = $request->departmentDescription;
-        $departments->is_active  = $request->departmentStatus;
-        $departments->save();
+        $masterformoptions = new masterFormOptions();
+        $masterformoptions->label = $request->masterFormLabel;
+        $masterformoptions->is_active  = $request->masterFormStatus;
+        $masterformoptions->save();
 
-        return redirect('departments');
+        return redirect('masterformoptions');
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  \App\Models\masterFormOptions  $masterFormOptions
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(masterFormOptions $masterFormOptions)
     {
         //
     }
@@ -69,45 +65,43 @@ class DepartmentController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  \App\Models\masterFormOptions  $masterFormOptions
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
     {
-        $departments = Department::findOrFail($id);
-        return view('departments.edit', compact('departments','id'));
+        $masterformoptions = masterFormOptions::findOrFail($id);
+        return view('master_form_options.edit', compact('masterformoptions','id'));
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  \App\Models\masterFormOptions  $masterFormOptions
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
     {
-        $departments = Department::findOrFail($id);
+        $masterformoptions = masterFormOptions::findOrFail($id);
 
-        $departments->name = $request->departmentName;
-        $departments->alias = $request->departmentAlias;
-        $departments->description = $request->departmentDescription;
-        $departments->is_active = $request->departmentStatus;
-        $departments->save();
+        $masterformoptions->label = $request->masterFormLabel;
+        $masterformoptions->is_active = $request->masterFormStatus;
+        $masterformoptions->save();
 
-        return redirect('departments');
+        return redirect('masterformoptions');
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  \App\Models\masterFormOptions  $masterFormOptions
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
     {
-        $departments = Department::findOrFail($id);
-        $departments->delete();
+        $masterformoptions = masterFormOptions::findOrFail($id);
+        $masterformoptions->delete();
 
         return Response::json(array('success' => true), 200); 
     }

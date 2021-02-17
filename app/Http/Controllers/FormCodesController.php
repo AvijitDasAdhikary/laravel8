@@ -3,11 +3,12 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Department;
+use App\Models\FormCodes;
 use Redirect,Response;
 use Illuminate\Support\Facades\Validator;
 
-class DepartmentController extends Controller
+
+class FormCodesController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,8 +17,8 @@ class DepartmentController extends Controller
      */
     public function index()
     {
-        $departments = Department::get();
-        return view('departments.view', compact('departments'));
+        $formcodes = FormCodes::get();
+        return view('form_codes.view', compact('formcodes'));
 
     }
 
@@ -28,7 +29,7 @@ class DepartmentController extends Controller
      */
     public function create()
     {
-        return view('departments.create');
+        //
     }
 
     /**
@@ -39,20 +40,7 @@ class DepartmentController extends Controller
      */
     public function store(Request $request)
     {
-        Validator::make($request->all(),[
-            'departmentName' => 'required',
-            'departmentAlias' => 'required',
-            'departmentDescription' => 'required',
-        ])->validate();
-
-        $departments = new Department();
-        $departments->name = $request->departmentName;
-        $departments->alias = $request->departmentAlias;
-        $departments->description = $request->departmentDescription;
-        $departments->is_active  = $request->departmentStatus;
-        $departments->save();
-
-        return redirect('departments');
+        //
     }
 
     /**
@@ -74,8 +62,7 @@ class DepartmentController extends Controller
      */
     public function edit($id)
     {
-        $departments = Department::findOrFail($id);
-        return view('departments.edit', compact('departments','id'));
+        //
     }
 
     /**
@@ -87,15 +74,7 @@ class DepartmentController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $departments = Department::findOrFail($id);
-
-        $departments->name = $request->departmentName;
-        $departments->alias = $request->departmentAlias;
-        $departments->description = $request->departmentDescription;
-        $departments->is_active = $request->departmentStatus;
-        $departments->save();
-
-        return redirect('departments');
+        //
     }
 
     /**
@@ -106,9 +85,6 @@ class DepartmentController extends Controller
      */
     public function destroy($id)
     {
-        $departments = Department::findOrFail($id);
-        $departments->delete();
-
-        return Response::json(array('success' => true), 200); 
+        //
     }
 }
