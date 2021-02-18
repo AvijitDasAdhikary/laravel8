@@ -262,6 +262,13 @@ return [
             // 'label'       => 4,
             'label_color' => 'success',
         ],
+        [
+            'text'        => 'Forms',
+            'url'         => 'forms',
+            'icon'        => 'far fa-folder-open',
+            // 'label'       => 4,
+            'label_color' => 'success',
+        ],
         // ['header' => 'account_settings'],
         // [
         //     'text' => 'profile',

@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\FormCodes;
 use Redirect,Response;
 use Illuminate\Support\Facades\Validator;
+use App\Models\Department;
 
 
 class FormCodesController extends Controller
@@ -17,7 +18,7 @@ class FormCodesController extends Controller
      */
     public function index()
     {
-        $formcodes = FormCodes::get();
+        $formcodes = FormCodes::with('departmentId')->get();
         return view('form_codes.view', compact('formcodes'));
 
     }
@@ -29,7 +30,8 @@ class FormCodesController extends Controller
      */
     public function create()
     {
-        //
+        $departments = Department::get();
+        return view('form_codes.create', compact('departments'));
     }
 
     /**
@@ -40,7 +42,20 @@ class FormCodesController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        validator::make($request->all(),[
+            'departmentID' => 'required',
+            'formCode' => 'required',
+            'formDescription' => 'required',
+        ])->validate();
+
+        $formcodes = new FormCodes();
+        $formcodes->department_id = $request->departmentID;
+        $formcodes->form_code = $request->formCode;
+        $formcodes->description = $request->formDescription;
+        $formcodes->is_active = $request->formStatus;
+        $formcodes->save();
+
+        return redirect('formcodes');
     }
 
     /**
@@ -62,7 +77,8 @@ class FormCodesController extends Controller
      */
     public function edit($id)
     {
-        //
+        $formcodes = FormCodes::findOrFail($id);
+        return view('form_codes.edit', compact('formcodes','id'));
     }
 
     /**
@@ -74,7 +90,15 @@ class FormCodesController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $formcodes = FormCodes::findOrFail($id);
+
+        $formcodes->department_id = $request->departmentID;
+        $formcodes->form_code = $request->formCode;
+        $formcodes->description = $request->formDescription;
+        $formcodes->is_active = $request->formStatus;
+        $formcodes->save();
+
+        return redirect('formcodes');
     }
 
     /**
@@ -85,6 +109,9 @@ class FormCodesController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $formcodes = FormCodes::findOrFail($id);
+        $formcodes->delete();
+
+        return Response::json(array('success' => true), 200); 
     }
 }

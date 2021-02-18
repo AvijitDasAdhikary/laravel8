@@ -7,6 +7,7 @@
     <div class="row mb-2">
         <div class="col-sm-6">
             <h1 class="d-inline">Create Master Form Options</h1>
+            <a href="/masterformoptions" class="btn btn-info btn-sm btn-flat d-inline-block ml-2 mt-n2 elevation-2 text-white">Back To View</a>
         </div>
         <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
@@ -29,8 +30,8 @@
                         <div class="row">
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label for="masterFormLabel">Label</label>
-                                    <input type="text" name="masterFormLabel" id="masterFormLabel" placeholder="Enter Label" class=" form-control rounded-0" value="{{ old('label') }}">
+                                    <label for="masterFormLabel" class="text-sm">Label</label>
+                                    <input type="text" name="masterFormLabel" id="masterFormLabel" placeholder="Enter Label" class=" form-control form-control-sm rounded-0" value="{{ old('label') }}">
                                     @error('masterFormLabel')
                                         <div class="alert-danger">{{ $message }}</div>
                                     @enderror
@@ -40,8 +41,8 @@
                         <div class="row">
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label for="masterFormStatus">Status</label>
-                                    <select name="masterFormStatus" id="masterFormStatus"   class="form-control rounded-0">
+                                    <label for="masterFormStatus" class="text-sm">Status</label>
+                                    <select name="masterFormStatus" id="masterFormStatus"   class="form-control form-control-sm rounded-0">
                                         <option value="1" selected>Active</option>
                                         <option value="0">Inactive</option>
                                     </select>

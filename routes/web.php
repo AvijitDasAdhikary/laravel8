@@ -29,5 +29,6 @@ Route::resources([
     'departments' => DepartmentController::class,
     'masterformoptions' => MasterFormOptionsController::class,
     'formcodes' => FormCodesController::class,
+    'forms' => FormsController::class,
 ]);
 

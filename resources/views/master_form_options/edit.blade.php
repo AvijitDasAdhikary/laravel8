@@ -27,16 +27,16 @@
                         <div class="row">
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label for="masterFormLabel">Label</label>
-                                    <input type="text" name="masterFormLabel" value="{{ $masterformoptions->label }}" class="form-control rounded-0">
+                                    <label for="masterFormLabel" class="text-sm">Label</label>
+                                    <input type="text" name="masterFormLabel" value="{{ $masterformoptions->label }}" class="form-control form-control-sm rounded-0">
                                 </div>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label for="masterFormStatus">Status</label>
-                                    <select name="masterFormStatus" id="masterFormStatus" class="form-control rounded-0">
+                                    <label for="masterFormStatus" class="text-sm">Status</label>
+                                    <select name="masterFormStatus" id="masterFormStatus" class="form-control form-control-sm rounded-0">
                                         <option value="1" @if($masterformoptions->is_active == 1) {{ 'selected' }} @endif>Active</option>
                                         <option value="0" @if($masterformoptions->is_active == 0) {{ 'selected' }} @endif>Inactive</option>
                                     </select>
