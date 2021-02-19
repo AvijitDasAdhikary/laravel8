@@ -1,5 +1,7 @@
 @extends('adminlte::page')
 
+@section('title', 'Department')
+
 @section('content_header')
     {{-- <h1>Edit Department</h1> --}}
     <div class="row mb-2">
@@ -44,7 +46,7 @@
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label for="departmentDescription" class="text-sm">Description</label>
-                                    <input type="text" name="departmentDescription" id="departmentDescription" value="{{ $departments->description }}" class="form-control form-control-sm rounded-0">
+                                    <textarea name="departmentDescription" id="departmentDescription" cols="5" rows="3" class="form-control form-control-sm rounded-0">{{ $departments->description }}</textarea>
                                 </div>
                             </div>
                         </div>

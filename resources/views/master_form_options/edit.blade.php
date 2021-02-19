@@ -1,5 +1,7 @@
 @extends('adminlte::page')
 
+@section('title', 'Master Form Options')
+
 @section('content_header')
     {{-- <h1>Edit Master Form Options</h1> --}}
     <div class="row mb-2">

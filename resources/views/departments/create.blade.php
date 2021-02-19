@@ -62,8 +62,9 @@
                         <div class="row">
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label for="departmentDescription" class="text-sm">Description</label>
-                                    <input type="text" name="departmentDescription" id="departmentDescription"placeholder="Enter Description" class="form-control form-control-sm rounded-0" value="{{ old('description') }}">
+                                    <label for="departmentDescription"
+                                    class="text-sm">Description</label>
+                                    <textarea name="departmentDescription" id="departmentDescription" cols="5" rows="3" class="form-control form-control-sm rounded-0" placeholder="Enter Description" value="{{ old('description') }}"></textarea>
                                     @error('departmentDescription')
                                         <div class="alert-danger">{{ $message }}</div>
                                     @enderror
@@ -96,7 +97,19 @@
 @stop
 
 @section('css')
-    
+    <style type="text/css">
+        ::-webkit-input-placeholder { opacity: 1; -webkit-transition: opacity .5s; transition: opacity .5s; }  /* Chrome <=56, Safari < 10 */
+        :-moz-placeholder { opacity: 1; -moz-transition: opacity .5s; transition: opacity .5s; } /* FF 4-18 */
+        ::-moz-placeholder { opacity: 1; -moz-transition: opacity .5s; transition: opacity .5s; } /* FF 19-51 */
+        :-ms-input-placeholder { opacity: 1; -ms-transition: opacity .5s; transition: opacity .5s; } /* IE 10+ */
+        ::placeholder { opacity: 1; transition: opacity .5s; } /* Modern Browsers */
+            
+        *:focus::-webkit-input-placeholder { opacity: 0; } /* Chrome <=56, Safari < 10 */
+        *:focus:-moz-placeholder { opacity: 0; } /* FF 4-18 */
+        *:focus::-moz-placeholder { opacity: 0; } /* FF 19-50 */
+        *:focus:-ms-input-placeholder { opacity: 0; } /* IE 10+ */
+        *:focus::placeholder { opacity: 0; } /* Modern Browsers */
+    </style>
 @stop
 
 @section('js')

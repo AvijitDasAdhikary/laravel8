@@ -18,3 +18,100 @@
         </div>
     </div>
 @stop
+
+@section('content')
+    <div class="row">
+        <div class="col-12">
+            <div class="card card-primary rounded-0">
+                <form action="/forms" method="POST">
+                    @csrf
+
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="departmentID" class="text-sm">Department</label>
+                                    <select name="departmentID" id="departmentID" class="@error('departmentID') is-invalid @enderror form-control form-control-sm rounded-0">
+                                        <option value="">Select Department</option>
+                                        @foreach($departments as $department)
+                                            <option value="{{$department->id}}">
+                                            {{$department->name}}</option>
+                                        @endforeach
+                                    </select>
+                                    @error('departmentID')
+                                        <div class="alert alert-danger">{{ $message }}</div>
+                                    @enderror
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="formTitle" class="text-sm">Title</label>
+                                    <input type="text" name="formTitle" id="formTitle" class="form-control form-control-sm rounded-0" placeholder="Enter Title" value="{{ old('title') }}">
+                                    @error('formTitle')
+                                        <div class="alert-danger">{{ $message }}</div>
+                                    @enderror
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="formsDescription" class="text-sm">Description</label>
+                                    <textarea name="formsDescription" id="formsDescription" cols="5" rows="3" class="form-control form-control-sm rounded-0" placeholder="Enter Description" value="{{ old('description') }}"></textarea>
+                                    @error('formsDescription')
+                                        <div class="alert-danger">{{ $message }}</div>
+                                    @enderror
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="formStatus" class="text-sm">Status</label>
+                                    <select name="formStatus" id="formStatus" class="form-control form-control-sm rounded-0">
+                                        <option value="1" selected>Active</option>
+                                        <option value="0">Inactive</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-footer mt-n4">
+                        <div class="form-group">
+                            <input type="submit" name="btnFormSubmit" value="Submit" class="btn btn-info btn-flat text-white">
+                            <a href="{{ url('forms') }}" id="btnFormCancel" class="btn btn-primary btn-flat text-white">Cancel</a>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+@stop
+
+@section('css')
+    <style type="text/css">
+        .is-invalid{
+            border: 2px solid red !important;
+        }
+
+        ::-webkit-input-placeholder { opacity: 1; -webkit-transition: opacity .5s; transition: opacity .5s; }  /* Chrome <=56, Safari < 10 */
+        :-moz-placeholder { opacity: 1; -moz-transition: opacity .5s; transition: opacity .5s; } /* FF 4-18 */
+        ::-moz-placeholder { opacity: 1; -moz-transition: opacity .5s; transition: opacity .5s; } /* FF 19-51 */
+        :-ms-input-placeholder { opacity: 1; -ms-transition: opacity .5s; transition: opacity .5s; } /* IE 10+ */
+        ::placeholder { opacity: 1; transition: opacity .5s; } /* Modern Browsers */
+            
+        *:focus::-webkit-input-placeholder { opacity: 0; } /* Chrome <=56, Safari < 10 */
+        *:focus:-moz-placeholder { opacity: 0; } /* FF 4-18 */
+        *:focus::-moz-placeholder { opacity: 0; } /* FF 19-50 */
+        *:focus:-ms-input-placeholder { opacity: 0; } /* IE 10+ */
+        *:focus::placeholder { opacity: 0; } /* Modern Browsers */
+    </style>
+@stop
+
+@section('js')
+    <script type="text/javascript">
+        
+    </script>
+@stop

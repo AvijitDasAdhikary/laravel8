@@ -12,4 +12,9 @@ class Forms extends Model
     use SoftDeletes;
 
     protected $table = 'forms';
+
+    public function departmentId()
+    {
+        return $this->belongsTo('App\Models\Department', 'department_id');
+    }
 }

@@ -77,8 +77,9 @@ class FormCodesController extends Controller
      */
     public function edit($id)
     {
+        $departments = Department::get();
         $formcodes = FormCodes::findOrFail($id);
-        return view('form_codes.edit', compact('formcodes','id'));
+        return view('form_codes.edit', compact('formcodes','id','departments'));
     }
 
     /**

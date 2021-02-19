@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Forms;
+use App\Models\Department;
+use Redirect,Response;
+use Illuminate\Support\Facades\Validator;
 
 class FormsController extends Controller
 {
@@ -14,7 +17,7 @@ class FormsController extends Controller
      */
     public function index()
     {
-        $forms = Forms::get();
+        $forms = Forms::with('departmentId')->get();
         return view('forms.view', compact('forms'));
     }
 
@@ -25,7 +28,8 @@ class FormsController extends Controller
      */
     public function create()
     {
-        return view('forms.create');
+        $departments = Department::get();
+        return view('forms.create',compact('departments'));
     }
 
     /**
@@ -36,7 +40,20 @@ class FormsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        validator::make($request->all(),[
+            'departmentID' => 'required',
+            'formTitle' => 'required',
+            'formsDescription' => 'required',
+        ])->validate();
+
+        $forms = new Forms();
+        $forms->department_id = $request->departmentID;
+        $forms->title = $request->formTitle;
+        $forms->description = $request->formsDescription;
+        $forms->is_active = $request->formStatus;
+        $forms->save();
+
+        return redirect('forms');
     }
 
     /**
@@ -58,7 +75,9 @@ class FormsController extends Controller
      */
     public function edit($id)
     {
-        //
+        $departments = Department::get();
+        $forms = Forms::findOrFail($id);
+        return view('forms.edit', compact('forms','id','departments'));
     }
 
     /**
@@ -70,7 +89,15 @@ class FormsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $forms = Forms::findOrFail($id);
+
+        $forms->department_id = $request->departmentID;
+        $forms->title = $request->formTitle;
+        $forms->description = $request->formsDescription;
+        $forms->is_active = $request->formStatus;
+        $forms->save();
+
+        return redirect('forms');
     }
 
     /**
@@ -81,6 +108,9 @@ class FormsController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $forms = Forms::findOrFail($id);
+        $forms->delete();
+
+        return Response::json(array('success' => true), 200); 
     }
 }

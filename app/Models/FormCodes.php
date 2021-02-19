@@ -14,7 +14,8 @@ class FormCodes extends Model
 
     protected $table = 'form_codes';
 
-    public function departmentId(){
+    public function departmentId()
+    {
         return $this->belongsTo('App\Models\Department', 'department_id');
     }
 }

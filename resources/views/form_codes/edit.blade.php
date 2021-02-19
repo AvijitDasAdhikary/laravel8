@@ -29,8 +29,15 @@
                         <div class="row">
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label for="departmentID">Department</label>
-                                    <input type="text" name="departmentID" id="departmentID" placeholder="Enter Department id" value="{{ $formcodes->department_id }}" class="form-control rounded-0">
+                                    <label for="departmentID" class="text-sm">Department</label>
+                                    <select name="departmentID" id="departmentID" class="form-control form-control-sm rounded-0">
+                                        <option value="">Select Department</option>
+                                        @foreach($departments as $department)
+                                            <option value="{{ $department->id }}" 
+                                            {{ $formcodes->department_id == $department->id ? 'selected' : '' }}>
+                                            {{ $department->name }}</option>
+                                        @endforeach
+                                    </select>
                                 </div>
                             </div>
                         </div>
@@ -46,7 +53,7 @@
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label for="formDescription" class="text-sm">Description</label>
-                                    <input type="text" name="formDescription" id="formDescription" value="{{ $formcodes->description }}" class="form-control form-control-sm rounded-0">
+                                    <textarea name="formDescription" id="formDescription" cols="5" rows="3" class="form-control form-control-sm rounded-0" >{{ $formcodes->description }}</textarea>
                                 </div>
                             </div>
                         </div>
