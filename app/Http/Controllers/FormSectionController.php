@@ -3,12 +3,12 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\FormSection;
 use App\Models\Forms;
-use App\Models\Department;
 use Redirect,Response;
 use Illuminate\Support\Facades\Validator;
 
-class FormsController extends Controller
+class FormSectionController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -17,8 +17,8 @@ class FormsController extends Controller
      */
     public function index()
     {
-        $forms = Forms::with('departmentId')->get();
-        return view('forms.view', compact('forms'));
+        $formsections = FormSection::with('formId')->get();
+        return view('form_section.view', compact('formsections'));
     }
 
     /**
@@ -28,8 +28,8 @@ class FormsController extends Controller
      */
     public function create()
     {
-        $departments = Department::get();
-        return view('forms.create',compact('departments'));
+        $forms = Forms::get();
+        return view('form_section.create', compact('forms'));
     }
 
     /**
@@ -41,19 +41,19 @@ class FormsController extends Controller
     public function store(Request $request)
     {
         validator::make($request->all(),[
-            'department' => 'required',
             'formTitle' => 'required',
-            'formsDescription' => 'required',
+            'sectionTitle' => 'required',
+            'parentID' => 'required',
         ])->validate();
 
-        $forms = new Forms();
-        $forms->department_id = $request->departmentID;
-        $forms->title = $request->formTitle;
-        $forms->description = $request->formsDescription;
-        $forms->is_active = $request->formStatus;
-        $forms->save();
+        $formsections = new FormSection();
+        $formsections->form_id = $request->formTitle;
+        $formsections->section_title = $request->sectionTitle;
+        $formsections->parent_id = $request->parentID;
+        $formsections->is_active = $request->sectionStatus;
+        $formsections->save();
 
-        return redirect('forms');
+        return redirect('formsection');
     }
 
     /**
@@ -75,9 +75,9 @@ class FormsController extends Controller
      */
     public function edit($id)
     {
-        $departments = Department::get();
-        $forms = Forms::findOrFail($id);
-        return view('forms.edit', compact('forms','id','departments'));
+        $forms = Forms::get();
+        $formsections = FormSection::findOrFail($id);
+        return view('form_section.edit', compact('formsections','id','forms'));
     }
 
     /**
@@ -90,19 +90,19 @@ class FormsController extends Controller
     public function update(Request $request, $id)
     {
         validator::make($request->all(),[
-            'department' => 'required',
             'formTitle' => 'required',
-            'formsDescription' => 'required',
+            'sectionTitle' => 'required',
+            'parentID' => 'required',
         ])->validate();
         
-        $forms = Forms::findOrFail($id);
-        $forms->department_id = $request->departmentID;
-        $forms->title = $request->formTitle;
-        $forms->description = $request->formsDescription;
-        $forms->is_active = $request->formStatus;
-        $forms->save();
+        $formsections = new FormSection();
+        $formsections->form_id = $request->formTitle;
+        $formsections->section_title = $request->sectionTitle;
+        $formsections->parent_id = $request->parentID;
+        $formsections->is_active = $request->sectionStatus;
+        $formsections->save();
 
-        return redirect('forms');
+        return redirect('formsection');
     }
 
     /**
@@ -113,8 +113,8 @@ class FormsController extends Controller
      */
     public function destroy($id)
     {
-        $forms = Forms::findOrFail($id);
-        $forms->delete();
+        $formsections = FormSection::findOrFail($id);
+        $formsections->delete();
 
         return Response::json(array('success' => true), 200); 
     }

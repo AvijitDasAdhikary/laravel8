@@ -40,7 +40,7 @@ class MasterFormOptionsController extends Controller
     public function store(Request $request)
     {
         Validator::make($request->all(),[
-            'masterFormLabel' => 'required',
+            'Label' => 'required',
         ])->validate();
 
         $masterformoptions = new masterFormOptions();
@@ -83,8 +83,11 @@ class MasterFormOptionsController extends Controller
      */
     public function update(Request $request, $id)
     {
+        Validator::make($request->all(),[
+            'Label' => 'required',
+        ])->validate();
+        
         $masterformoptions = masterFormOptions::findOrFail($id);
-
         $masterformoptions->label = $request->masterFormLabel;
         $masterformoptions->is_active = $request->masterFormStatus;
         $masterformoptions->save();

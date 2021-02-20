@@ -29,8 +29,11 @@
                         <div class="row">
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label for="todoName" class="text-sm">Name</label>
+                                    <label for="departmentName" class="text-sm">Name</label>
                                     <input type="text" name="departmentName" value="{{ $departments->name }}" class="form-control form-control-sm rounded-0">
+                                    @error('departmentName')
+                                        <div class="alert-danger">{{ $message }}</div>
+                                    @enderror
                                 </div>
                             </div>
                         </div>
@@ -39,6 +42,9 @@
                                 <div class="form-group">
                                     <label for="departmentAlias" class="text-sm">Alias</label>
                                     <input type="text" name="departmentAlias" id="departmentAlias" value="{{ $departments->alias }}" class="form-control form-control-sm rounded-0">
+                                    @error('departmentAlias')
+                                        <div class="alert-danger">{{ $message }}</div>
+                                    @enderror
                                 </div>
                             </div>
                         </div>
@@ -47,6 +53,9 @@
                                 <div class="form-group">
                                     <label for="departmentDescription" class="text-sm">Description</label>
                                     <textarea name="departmentDescription" id="departmentDescription" cols="5" rows="3" class="form-control form-control-sm rounded-0">{{ $departments->description }}</textarea>
+                                    @error('departmentDescription')
+                                        <div class="alert-danger">{{ $message }}</div>
+                                    @enderror
                                 </div>
                             </div>
                         </div>

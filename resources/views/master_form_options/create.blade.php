@@ -20,7 +20,7 @@
 @stop
 
 @section('content')
-<div class="row">
+    <div class="row">
         <div class="col-12">
             <div class="card card-primary rounded-0">
                 <form action="/masterformoptions" method="POST">
@@ -32,7 +32,7 @@
                                 <div class="form-group">
                                     <label for="masterFormLabel" class="text-sm">Label</label>
                                     <input type="text" name="masterFormLabel" id="masterFormLabel" placeholder="Enter Label" class=" form-control form-control-sm rounded-0" value="{{ old('label') }}">
-                                    @error('masterFormLabel')
+                                    @error('Label')
                                         <div class="alert-danger">{{ $message }}</div>
                                     @enderror
                                 </div>

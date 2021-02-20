@@ -269,6 +269,20 @@ return [
             // 'label'       => 4,
             'label_color' => 'success',
         ],
+        [
+            'text'        => 'Form Section',
+            'url'         => 'formsection',
+            'icon'        => 'fas fa-envelope-open-text',
+            // 'label'       => 4,
+            'label_color' => 'success',
+        ],
+        [
+            'text'        => 'Form Item',
+            'url'         => 'formitem',
+            'icon'        => 'fas fa-file-signature',
+            // 'label'       => 4,
+            'label_color' => 'success',
+        ],
         // ['header' => 'account_settings'],
         // [
         //     'text' => 'profile',

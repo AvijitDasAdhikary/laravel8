@@ -30,5 +30,7 @@ Route::resources([
     'masterformoptions' => MasterFormOptionsController::class,
     'formcodes' => FormCodesController::class,
     'forms' => FormsController::class,
+    'formsection' => FormSectionController::class,
+    'formitem' => FormItemController::class,
 ]);
 

@@ -30,15 +30,15 @@
                         <div class="row">
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label for="departmentID" class="text-sm">Department</label>
-                                    <select name="departmentID" id="departmentID" class="form-control form-control-sm rounded-0">
+                                    <label for="department" class="text-sm">Department</label>
+                                    <select name="department" id="department" class="form-control form-control-sm rounded-0">
                                         <option value="">Select Department</option>
                                         @foreach($departments as $department)
                                             <option value="{{$department->id}}">
                                             {{$department->name}}</option>
                                         @endforeach
                                     </select>
-                                    @error('departmentID')
+                                    @error('department')
                                         <div class="alert-danger">{{ $message }}</div>
                                     @enderror
                                 </div>

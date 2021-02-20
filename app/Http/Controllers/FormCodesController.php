@@ -43,7 +43,7 @@ class FormCodesController extends Controller
     public function store(Request $request)
     {
         validator::make($request->all(),[
-            'departmentID' => 'required',
+            'department' => 'required',
             'formCode' => 'required',
             'formDescription' => 'required',
         ])->validate();
@@ -91,8 +91,13 @@ class FormCodesController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $formcodes = FormCodes::findOrFail($id);
+        validator::make($request->all(),[
+            'department' => 'required',
+            'formCode' => 'required',
+            'formDescription' => 'required',
+        ])->validate();
 
+        $formcodes = FormCodes::findOrFail($id);
         $formcodes->department_id = $request->departmentID;
         $formcodes->form_code = $request->formCode;
         $formcodes->description = $request->formDescription;

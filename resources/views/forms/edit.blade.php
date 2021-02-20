@@ -29,8 +29,8 @@
                         <div class="row">
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label for="departmentID" class="text-sm">Department</label>
-                                    <select name="departmentID" id="departmentID" class="form-control form-control-sm rounded-0">
+                                    <label for="department" class="text-sm">Department</label>
+                                    <select name="department" id="department" class="form-control form-control-sm rounded-0">
                                         <option value="">Select Department</option>
                                         @foreach($departments as $department)
                                             <option value="{{ $department->id }}" 
@@ -38,6 +38,9 @@
                                             {{ $department->name }}</option>
                                         @endforeach
                                     </select>
+                                    @error('department')
+                                        <div class="alert-danger">{{ $message }}</div>
+                                    @enderror
                                 </div>
                             </div>
                         </div>
@@ -46,6 +49,9 @@
                                 <div class="form-group">
                                     <label for="formTitle" class="text-sm">Title</label>
                                     <input type="text" name="formTitle" id="formTitle" value="{{ $forms->title }}" class="form-control form-control-sm rounded-0">
+                                    @error('formTitle')
+                                        <div class="alert-danger">{{ $message }}</div>
+                                    @enderror
                                 </div>
                             </div>
                         </div>
@@ -53,7 +59,11 @@
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label for="formsDescription" class="text-sm">Description</label>
+                                    
                                     <input type="text" name="formsDescription" id="formsDescription" value="{{ $forms->description }}" class="form-control form-control-sm rounded-0">
+                                    @error('formsDescription')
+                                        <div class="alert-danger">{{ $message }}</div>
+                                    @enderror
                                 </div>
                             </div>
                         </div>
