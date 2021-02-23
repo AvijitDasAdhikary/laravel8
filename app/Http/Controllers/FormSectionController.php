@@ -95,7 +95,7 @@ class FormSectionController extends Controller
             'parentID' => 'required',
         ])->validate();
         
-        $formsections = new FormSection();
+        $formsections = FormSection::findOrFail($id);
         $formsections->form_id = $request->formTitle;
         $formsections->section_title = $request->sectionTitle;
         $formsections->parent_id = $request->parentID;

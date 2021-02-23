@@ -49,7 +49,7 @@ class FormCodesController extends Controller
         ])->validate();
 
         $formcodes = new FormCodes();
-        $formcodes->department_id = $request->departmentID;
+        $formcodes->department_id = $request->department;
         $formcodes->form_code = $request->formCode;
         $formcodes->description = $request->formDescription;
         $formcodes->is_active = $request->formStatus;
@@ -98,7 +98,7 @@ class FormCodesController extends Controller
         ])->validate();
 
         $formcodes = FormCodes::findOrFail($id);
-        $formcodes->department_id = $request->departmentID;
+        $formcodes->department_id = $request->department;
         $formcodes->form_code = $request->formCode;
         $formcodes->description = $request->formDescription;
         $formcodes->is_active = $request->formStatus;

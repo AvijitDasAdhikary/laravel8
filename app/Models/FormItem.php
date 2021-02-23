@@ -12,4 +12,9 @@ class FormItem extends Model
     use SoftDeletes;
 
     protected $table = 'form_items';
+
+    public function formSectionId()
+    {
+        return $this->belongsTo('App\Models\FormSection','section_id');
+    }
 }

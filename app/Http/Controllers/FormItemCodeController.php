@@ -3,12 +3,13 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Forms;
-use App\Models\Department;
+use App\Models\FormItemCode;
+use App\Models\FormItem;
+use App\Models\FormCodes;
 use Redirect,Response;
 use Illuminate\Support\Facades\Validator;
 
-class FormsController extends Controller
+class FormItemCodeController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -17,8 +18,8 @@ class FormsController extends Controller
      */
     public function index()
     {
-        $forms = Forms::with('departmentId')->get();
-        return view('forms.view', compact('forms'));
+        $formitemcodes = FormItemCode::with('formItemId','formCodeId')->get();
+        return view('form_item_codes.view', compact('formitemcodes'));
     }
 
     /**
@@ -28,8 +29,9 @@ class FormsController extends Controller
      */
     public function create()
     {
-        $departments = Department::get();
-        return view('forms.create',compact('departments'));
+        $formitems = FormItem::get();
+        $formcodes = FormCodes::get();
+        return view('form_item_codes.create',compact('formitems','formcodes'));
     }
 
     /**
@@ -41,19 +43,17 @@ class FormsController extends Controller
     public function store(Request $request)
     {
         validator::make($request->all(),[
-            'department' => 'required',
-            'formTitle' => 'required',
-            'formsDescription' => 'required',
+            'formItemTitle' => 'required',
+            'formCode' => 'required',
         ])->validate();
 
-        $forms = new Forms();
-        $forms->department_id = $request->department;
-        $forms->title = $request->formTitle;
-        $forms->description = $request->formsDescription;
-        $forms->is_active = $request->formStatus;
-        $forms->save();
+        $formitemcodes = new FormItemCode();
+        $formitemcodes->item_id = $request->formItemTitle;
+        $formitemcodes->code_id = $request->formCode;
+        $formitemcodes->is_active = $request->formItemCodeStatus;
+        $formitemcodes->save();
 
-        return redirect('forms');
+        return redirect('formitemcodes');
     }
 
     /**
@@ -75,9 +75,9 @@ class FormsController extends Controller
      */
     public function edit($id)
     {
-        $departments = Department::get();
-        $forms = Forms::findOrFail($id);
-        return view('forms.edit', compact('forms','id','departments'));
+        $formitems = FormItem::get();
+        $formitemcodes = FormItemCode::findOrFail($id);
+        return view('form_item_codes.edit', compact('formitemcodes','id','formitems'));
     }
 
     /**
@@ -89,20 +89,7 @@ class FormsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        validator::make($request->all(),[
-            'department' => 'required',
-            'formTitle' => 'required',
-            'formsDescription' => 'required',
-        ])->validate();
-        
-        $forms = Forms::findOrFail($id);
-        $forms->department_id = $request->department;
-        $forms->title = $request->formTitle;
-        $forms->description = $request->formsDescription;
-        $forms->is_active = $request->formStatus;
-        $forms->save();
-
-        return redirect('forms');
+        //
     }
 
     /**
@@ -113,8 +100,8 @@ class FormsController extends Controller
      */
     public function destroy($id)
     {
-        $forms = Forms::findOrFail($id);
-        $forms->delete();
+        $formitemcodes = FormItemCode::findOrFail($id);
+        $formitemcodes->delete();
 
         return Response::json(array('success' => true), 200); 
     }

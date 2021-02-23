@@ -283,6 +283,13 @@ return [
             // 'label'       => 4,
             'label_color' => 'success',
         ],
+        [
+            'text'        => 'Form Item Codes',
+            'url'         => 'formitemcodes',
+            'icon'        => 'far fa-file-code',
+            // 'label'       => 4,
+            'label_color' => 'success',
+        ],
         // ['header' => 'account_settings'],
         // [
         //     'text' => 'profile',

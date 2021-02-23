@@ -11,7 +11,7 @@
             <ol class="breadcrumb float-sm-right">
                 <li class="breadcrumb-item"><a href="{{ url('developer') }}" class="text-info">Home</a></li>
                 <li class="breadcrumb-item active"><a href="{{ url('formsection') }}" class="text-info">Form Section</a></li>
-                <li class="breadcrumb-item active">Create</li>
+                <li class="breadcrumb-item active">Update</li>
             </ol>
         </div>
     </div>
@@ -57,7 +57,7 @@
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label for="parentID" class="text-sm">parent ID</label>
-                                    <input type="text" name="parentID" id="parentID" value="{{ $formsections->parent_id }}" class="form-control form-control-sm rounded-0">
+                                    <input type="number" name="parentID" id="parentID" value="{{ $formsections->parent_id }}" class="form-control form-control-sm rounded-0">
                                     @error('parentID')
                                         <div class="alert-danger">{{ $message }}</div>
                                     @enderror
