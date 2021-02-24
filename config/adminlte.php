@@ -290,6 +290,13 @@ return [
             // 'label'       => 4,
             'label_color' => 'success',
         ],
+        [
+            'text'        => 'Form Item Options',
+            'url'         => 'formitemoptions',
+            'icon'        => 'fas fa-server',
+            // 'label'       => 4,
+            'label_color' => 'success',
+        ],
         // ['header' => 'account_settings'],
         // [
         //     'text' => 'profile',

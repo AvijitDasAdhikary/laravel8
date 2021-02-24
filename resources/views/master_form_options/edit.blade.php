@@ -31,7 +31,7 @@
                                 <div class="form-group">
                                     <label for="masterFormLabel" class="text-sm">Label</label>
                                     <input type="text" name="masterFormLabel" value="{{ $masterformoptions->label }}" class="form-control form-control-sm rounded-0">
-                                    @error('Label')
+                                    @error('masterFormLabel')
                                         <div class="alert-danger">{{ $message }}</div>
                                     @enderror
                                 </div>

@@ -3,13 +3,13 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\FormItemCode;
+use App\Models\FormItemOption;
 use App\Models\FormItem;
-use App\Models\FormCodes;
+use App\Models\masterFormOptions;
 use Redirect,Response;
 use Illuminate\Support\Facades\Validator;
 
-class FormItemCodeController extends Controller
+class FormItemOptionController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -18,8 +18,8 @@ class FormItemCodeController extends Controller
      */
     public function index()
     {
-        $formitemcodes = FormItemCode::with('formItemId','formCodeId')->get();
-        return view('form_item_codes.view', compact('formitemcodes'));
+        $formitemoptions = FormItemOption::with('ItemId','OptionId')->get();
+        return view('form_item_options.view',compact('formitemoptions'));
     }
 
     /**
@@ -30,8 +30,8 @@ class FormItemCodeController extends Controller
     public function create()
     {
         $formitems = FormItem::get();
-        $formcodes = FormCodes::get();
-        return view('form_item_codes.create',compact('formitems','formcodes'));
+        $masterformoptions = masterFormOptions::get();
+        return view('form_item_options.create',compact('formitems','masterformoptions'));
     }
 
     /**
@@ -44,16 +44,16 @@ class FormItemCodeController extends Controller
     {
         validator::make($request->all(),[
             'formItemTitle' => 'required',
-            'formCode' => 'required',
+            'masterFormLabel' => 'required',
         ])->validate();
 
-        $formitemcodes = new FormItemCode();
-        $formitemcodes->item_id = $request->formItemTitle;
-        $formitemcodes->code_id = $request->formCode;
-        $formitemcodes->is_active = $request->formItemCodeStatus;
-        $formitemcodes->save();
+        $formitemoptions = new FormItemOption();
+        $formitemoptions->item_id = $request->formItemTitle;
+        $formitemoptions->option_id = $request->masterFormLabel;
+        $formitemoptions->is_active = $request->formItemOptionStatus;
+        $formitemoptions->save();
 
-        return redirect('formitemcodes');
+        return redirect('formitemoptions');
     }
 
     /**
@@ -76,9 +76,9 @@ class FormItemCodeController extends Controller
     public function edit($id)
     {
         $formitems = FormItem::get();
-        $formcodes = FormCodes::get();
-        $formitemcodes = FormItemCode::findOrFail($id);
-        return view('form_item_codes.edit', compact('formitemcodes','id','formitems','formcodes'));
+        $masterformoptions = masterFormOptions::get();
+        $formitemoptions = FormItemOption::findOrFail($id);
+        return view('form_item_options.edit', compact('formitemoptions','id','formitems','masterformoptions'));
     }
 
     /**
@@ -92,16 +92,16 @@ class FormItemCodeController extends Controller
     {
         validator::make($request->all(),[
             'formItemTitle' => 'required',
-            'formCode' => 'required',
+            'masterFormLabel' => 'required',
         ])->validate();
 
-        $formitemcodes = FormItemCode::findOrFail($id);
-        $formitemcodes->item_id = $request->formItemTitle;
-        $formitemcodes->code_id = $request->formCode;
-        $formitemcodes->is_active = $request->formItemCodeStatus;
-        $formitemcodes->save();
+        $formitemoptions = FormItemOption::findOrFail($id);
+        $formitemoptions->item_id = $request->formItemTitle;
+        $formitemoptions->option_id = $request->masterFormLabel;
+        $formitemoptions->is_active = $request->formItemOptionStatus;
+        $formitemoptions->save();
 
-        return redirect('formitemcodes');
+        return redirect('formitemoptions');
     }
 
     /**
@@ -112,8 +112,8 @@ class FormItemCodeController extends Controller
      */
     public function destroy($id)
     {
-        $formitemcodes = FormItemCode::findOrFail($id);
-        $formitemcodes->delete();
+        $formitemoptions = FormItemOption::findOrFail($id);
+        $formitemoptions->delete();
 
         return Response::json(array('success' => true), 200); 
     }

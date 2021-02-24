@@ -33,5 +33,6 @@ Route::resources([
     'formsection' => FormSectionController::class,
     'formitem' => FormItemController::class,
     'formitemcodes' => FormItemCodeController::class,
+    'formitemoptions' => FormItemOptionController::class,
 ]);
 
