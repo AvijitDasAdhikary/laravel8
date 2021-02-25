@@ -40,11 +40,17 @@ class MasterFormOptionsController extends Controller
     public function store(Request $request)
     {
         Validator::make($request->all(),[
-            'masterFormLabel' => 'required',
+            'masterFormLabel' => 'required|unique:master_form_options,label',
+            'inputColorCode' => 'required|unique:master_form_options,color_code'
+            ],[
+                'inputColorCode.required' => 'Please select a color',
+                'inputColorCode.unique' => 'duplicate'
         ])->validate();
+        
 
         $masterformoptions = new masterFormOptions();
         $masterformoptions->label = $request->masterFormLabel;
+        $masterformoptions->color_code = $request->inputColorCode;
         $masterformoptions->is_active  = $request->masterFormStatus;
         $masterformoptions->save();
 
@@ -85,10 +91,15 @@ class MasterFormOptionsController extends Controller
     {
         Validator::make($request->all(),[
             'masterFormLabel' => 'required',
+            'inputColorCode' => 'required'
+            ],[
+                'inputColorCode.required' => 'Please select a color',
+                'inputColorCode.unique' => 'duplicate'
         ])->validate();
         
         $masterformoptions = masterFormOptions::findOrFail($id);
         $masterformoptions->label = $request->masterFormLabel;
+        $masterformoptions->color_code = $request->inputColorCode;
         $masterformoptions->is_active = $request->masterFormStatus;
         $masterformoptions->save();
 

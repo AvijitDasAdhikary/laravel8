@@ -36,6 +36,12 @@
                                     @enderror
                                 </div>
                             </div>
+                            <div class="col-md-2 col-sm-12 col-xs-12">
+                                <div class="form-group">
+                                    <label for="inputColorCode" class="text-sm">Select Color</label>
+                                    <input type="text" class="form-control form-control-sm text-sm rounded-0" name="inputColorCode" id="inputColorCode" value="{{ $masterformoptions->color_code }}" required>
+                                </div>
+                            </div>
                         </div>
                         <div class="row">
                             <div class="col-md-4">
@@ -93,38 +99,36 @@
 
 @section('js')
     <script type="text/javascript">
-        $(function(){
-            $.ajaxSetup({
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                }
-            });
-            
-            $.ajax({
-                url: "{{ url('/departments') }}",
-                type: "POST",
-                data: formData,
-                contentType: false,
-                processData: false,
-                beforeSend: function () {
-                    $('#addDepartmentProcessMsgBox').removeClass("d-none");
-                    $('#addDepartmentErrorMsgBox').addClass("d-none");
-                },
-                success: function (response) {
-                    console.log(response);
-                    $('#addDepartmentProcessMsgBox').addClass("d-none");
-                    $('#addDepartmentErrorMsgBox').addClass("d-none");
-                    $('#addDepartmentSuccessMsgBox').removeClass("d-none");
-                    var delay = 1500;
-                    setTimeout(function(){ window.location = '{!! url('/departments') !!}'; }, delay);
-                },
-                error: function (response) {
-                    console.log(response);
-                    $('#addDepartmentProcessMsgBox').addClass("d-none");
-                    $('#addDepartmentSuccessMsgBox').addClass("d-none");
-                    $('#addDepartmentErrorMsgBox').removeClass("d-none");
-                }
-            }); 
+        $(function () {
+            $('#inputColorCode').colorpicker({
+                format: 'hex',
+                extensions: [
+                    {
+                        name: 'swatches',
+                        options: {
+                            colors: {
+                                'black': '#000000',
+                                'red': '#FF1744',
+                                'teal': '#00BFA5',
+                                'yellow': '#EEFF41',
+                                'purple': '#AA00FF',
+                                'green': '#00C853',
+                                'pink': '#FF4081',
+                                'gray': '#9E9E9E',
+                                'blue': '#0D47A1',
+                                'white': '#ffffff',
+                                'orange': '#FF5722',
+                                'brown': '#6D4C41',
+                                'violet': '#673AB7'
+                            },
+                            namesAsValues: false
+                        }
+                    }
+                ]
+            }).on('colorpickerChange colorpickerCreate', function(e){
+                var code = e.color.toString('hex');
+                $('#inputColorCode').css({'background-color': code,'color': 'transparent'});
+            })
         });
     </script>
 @stop

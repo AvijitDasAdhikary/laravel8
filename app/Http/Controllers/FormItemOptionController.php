@@ -46,13 +46,16 @@ class FormItemOptionController extends Controller
             'formItemTitle' => 'required',
             'masterFormLabel' => 'required',
         ])->validate();
-
-        $formitemoptions = new FormItemOption();
-        $formitemoptions->item_id = $request->formItemTitle;
-        $formitemoptions->option_id = $request->masterFormLabel;
-        $formitemoptions->is_active = $request->formItemOptionStatus;
-        $formitemoptions->save();
-
+        
+        $option_id = $request->input('masterFormLabel'); 
+        foreach($option_id as $option)
+        {
+            $formitemoptions = new FormItemOption();
+            $formitemoptions->item_id = $request->formItemTitle;
+            $formitemoptions->option_id = $option;
+            $formitemoptions->is_active = $request->formItemOptionStatus;
+            $formitemoptions->save();
+        }
         return redirect('formitemoptions');
     }
 
@@ -95,11 +98,15 @@ class FormItemOptionController extends Controller
             'masterFormLabel' => 'required',
         ])->validate();
 
-        $formitemoptions = FormItemOption::findOrFail($id);
-        $formitemoptions->item_id = $request->formItemTitle;
-        $formitemoptions->option_id = $request->masterFormLabel;
-        $formitemoptions->is_active = $request->formItemOptionStatus;
-        $formitemoptions->save();
+        $option_id = $request->input('masterFormLabel'); 
+        foreach($option_id as $option)
+        {
+            $formitemoptions = FormItemOption::findOrFail($id);
+            $formitemoptions->item_id = $request->formItemTitle;
+            $formitemoptions->option_id = $option;
+            $formitemoptions->is_active = $request->formItemOptionStatus;
+            $formitemoptions->save();
+        }
 
         return redirect('formitemoptions');
     }

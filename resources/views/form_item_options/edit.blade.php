@@ -44,9 +44,9 @@
                         </div>
                         <div class="row">
                             <div class="col-md-4">
-                                <div class="form-group">
+                                <div class="form-group select2-purple">
                                     <label for="masterFormLabel" class="text-sm">Option</label>
-                                    <select name="masterFormLabel" id="masterFormLabel" class="form-control form-control-sm rounded-0">
+                                    <select name="masterFormLabel[]" id="masterFormLabel" class="select2" multiple="multiple" style="width: 100%" data-dropdown-css-class="select2-purple">
                                         <option value="">Select Option</option>
                                         @foreach($masterformoptions as $masterformoption)
                                             <option value="{{$masterformoption->id}}" {{ $formitemoptions->option_id ==  $masterformoption->id ? 'selected' : '' }}>
@@ -81,4 +81,12 @@
             </div>
         </div>
     </div>
+@stop
+
+@section('js')
+    <script type="text/javascript">
+        $(function () {
+            $('.select2').select2()
+        });
+    </script>
 @stop

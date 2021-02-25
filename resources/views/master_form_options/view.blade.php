@@ -26,6 +26,7 @@
                     <thead>
                         <tr>
                             <th class="bg-info">Label</th>
+                            <th class="bg-info">Color Code</th>
                             <th class="bg-info">Status</th>
                             <th class="bg-info">Action</th>
                         </tr>
@@ -51,6 +52,9 @@
                                             $btnClass = "info";
                                     @endphp
                                     <span class="btn btn-{{$btnClass}} btn-sm btn-flat rounded-0">{{$masterformoption->label}}</span>
+                                </td>
+                                <td>
+                                    <button class="btn btn-flat btn-md w-50" style="background-color: {{ $masterformoption->color_code }}"></button>
                                 </td>
                                 <td>
                                     @if($masterformoption->is_active == 1)
@@ -93,7 +97,7 @@
             $('#masterformoptionListView').DataTable({
                 responsive: true,
                 columnDefs: [
-                    { orderable: false, targets: 2 }
+                    { orderable: false, targets: 3 }
                 ]
             });
         });
