@@ -29,18 +29,31 @@
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group">
+                                    <label for="formTitle" class="text-sm">Form Title</label>
+                                    <select name="formTitle" id="formTitle" class="form-control form-control-sm rounded-0" onChange="getFormTitle(this.value)" required>
+                                        <option value="">Select Form</option>
+                                        @foreach($forms as $form)
+                                            <option value="{{$form->id}}">{{$form->title}}</option>
+                                        @endforeach
+                                    </select>
+                                    @error('formTitle')
+                                        <div class="alert-danger">{{ $message }}</div>
+                                    @enderror
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
                                     <label for="sectionTitle" class="text-sm">Section Title</label>
                                     <select name="sectionTitle" id="sectionTitle" class="form-control form-control-sm rounded-0">
                                         <option value="">Select Section</option>
-                                        @foreach($formsections as $formsection)
-                                            <option value="{{$formsection->id}}">{{$formsection->section_title}}</option>
-                                        @endforeach
                                     </select>
                                     @error('sectionTitle')
                                         <div class="alert-danger">{{ $message }}</div>
                                     @enderror
                                 </div>
                             </div>
+                        </div>
+                        <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="formItemTitle" class="text-sm">Form Item Title</label>
@@ -50,8 +63,6 @@
                                     @enderror
                                 </div>
                             </div>
-                        </div>
-                        <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="formItemPoint" class="text-sm">Point</label>
@@ -61,6 +72,9 @@
                                     @enderror
                                 </div>
                             </div>
+                            
+                        </div>
+                        <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="formItemComment" class="text-sm">Is Comment</label>
@@ -73,8 +87,6 @@
                                     @enderror
                                 </div>
                             </div>
-                        </div>
-                        <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="formItemPicture1" class="text-sm">Is Picture 1</label>
@@ -87,6 +99,9 @@
                                     @enderror
                                 </div>
                             </div>
+                            
+                        </div>
+                        <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="formItemPicture2" class="text-sm">Is Picture 2</label>
@@ -99,8 +114,6 @@
                                     @enderror
                                 </div>
                             </div>
-                        </div>
-                        <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="formItemStatus" class="text-sm">Status</label>
@@ -141,5 +154,28 @@
 @stop
 
 @section('js')
-    
+    <script>
+        function getFormTitle(formId){
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+
+            $("#sectionTitle").html(" ");
+            $.ajax({
+                url: "{{url('formitem/create')}}/"+formId,
+                type: "POST",
+                contentType: false,
+                processData: false,
+                success: function(response){
+                    var option = '<option value="">Select Form</option>';
+                    response.map(function(el){
+                        option +='<option value="'+el.id+'">'+el.title+'</option>';
+                    })
+                    $("#sectionTitle").append(option);
+                }
+            })
+        }
+    </script>
 @stop

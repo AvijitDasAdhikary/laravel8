@@ -29,13 +29,40 @@
                         <div class="row">
                             <div class="col-md-4">
                                 <div class="form-group">
-                                <label for="formItemTitle" class="text-sm">Item</label>
-                                    <select name="formItemTitle" id="formItemTitle" class="form-control form-control-sm rounded-0">
-                                        <option value="">Select Item</option>
-                                        @foreach($formitems as $formitem)
-                                            <option value="{{$formitem->id}}">
-                                            {{$formitem->title}}</option>
+                                <label for="formTitle" class="text-sm">Form Title</label>
+                                    <select name="formTitle" id="formTitle" class="form-control form-control-sm rounded-0" onChange="getFormTitle(this.value)" required>
+                                    <option value="">Select Form</option>
+                                        @foreach($forms as $form)
+                                            <option value="{{$form->id}}">{{$form->title}}</option>
                                         @endforeach
+                                    </select>
+                                    @error('formTitle')
+                                        <div class="alert-danger">{{ $message }}</div>
+                                    @enderror
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                <label for="sectionTitle" class="text-sm">Section Title</label>
+                                    <select name="sectionTitle" id="sectionTitle" class="form-control form-control-sm rounded-0" onChange="getSectionTitle(this.value)" required>
+                                        <option value="">Select Section</option>
+                                        
+                                    </select>
+                                    @error('sectionTitle')
+                                        <div class="alert-danger">{{ $message }}</div>
+                                    @enderror
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                <label for="formItemTitle" class="text-sm">Item Title</label>
+                                    <select name="formItemTitle" id="formItemTitle" class="form-control form-control-sm rounded-0" onChange="getItemTitle(this.value)" required>
+                                        <option value="">Select Item</option>
+                                        
                                     </select>
                                     @error('formItemTitle')
                                         <div class="alert-danger">{{ $message }}</div>
@@ -101,5 +128,51 @@
 @stop
 
 @section('js')
+    <script>
+        function getFormTitle(formId){
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
 
+            $("#sectionTitle").html(" ");
+            $.ajax({
+                url: "{{url('formitemcodes/create/formSection')}}/"+formId,
+                type: "POST",
+                contentType: false,
+                processData: false,
+                success: function(response){
+                    var option = '<option value="">Select Form</option>';
+                    response.map(function(el){
+                        option +='<option value="'+el.id+'">'+el.title+'</option>';
+                    })
+                    $("#sectionTitle").append(option);
+                }
+            })
+        }
+
+        function getSectionTitle(SectionId){
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+
+            $("#formItemTitle").html(" ");
+            $.ajax({
+                url: "{{url('formitemcodes/create/formItem')}}/"+SectionId,
+                type: "POST",
+                contentType: false,
+                processData: false,
+                success: function(response){
+                    var option = '<option value="">Select Item</option>';
+                    response.map(function(el){
+                        option +='<option value="'+el.id+'">'+el.title+'</option>';
+                    })
+                    $("#formItemTitle").append(option);
+                }
+            })
+        }
+    </script>
 @stop

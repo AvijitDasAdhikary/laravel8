@@ -36,3 +36,8 @@ Route::resources([
     'formitemoptions' => FormItemOptionController::class,
 ]);
 
+Route::post('formitem/create/{formId}', ['uses' => 'FormItemController@getFormTitle']);
+Route::post('formitemcodes/create/formSection/{formId}', ['uses' => 'FormItemCodeController@getFormTitle']);
+Route::post('formitemcodes/create/formItem/{SectionId}', ['uses' => 'FormItemCodeController@getSectionTitle']);
+Route::post('formitemoptions/create/formSection/{formId}', ['uses' => 'FormItemOptionController@getFormTitle']);
+Route::post('formitemoptions/create/formItem/{SectionId}', ['uses' => 'FormItemOptionController@getSectionTitle']);

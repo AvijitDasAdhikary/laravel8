@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\FormItem;
 use App\Models\FormSection;
+use App\Models\Forms;
 use Redirect,Response;
 use Illuminate\Support\Facades\Validator;
 
@@ -28,8 +29,9 @@ class FormItemController extends Controller
      */
     public function create()
     {
+        $forms = Forms::get();
         $formsections = FormSection::get();
-        return view('form_item.create',compact('formsections'));
+        return view('form_item.create',compact('formsections','forms'));
     }
 
     /**
@@ -81,9 +83,10 @@ class FormItemController extends Controller
      */
     public function edit($id)
     {
+        $forms = Forms::get();
         $formsections = FormSection::get();
         $formitems = FormItem::findOrFail($id);
-        return view('form_item.edit', compact('formitems','id','formsections'));
+        return view('form_item.edit', compact('formitems','id','formsections','forms'));
     }
 
     /**
@@ -129,5 +132,17 @@ class FormItemController extends Controller
         $formitems->delete();
 
         return Response::json(array('success' => true), 200); 
+    }
+
+    public function getFormTitle($formId){
+        $formtitles = FormSection::where(['form_id'=>$formId])->get();
+        $returndata = [];
+        foreach($formtitles as $formtitle){
+            $returndata[] = [
+                'id' => $formtitle->id,
+                'title' => $formtitle->section_title,
+            ];
+        }
+        return Response::json($returndata,200);
     }
 }

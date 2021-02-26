@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Models\FormItemOption;
 use App\Models\FormItem;
 use App\Models\masterFormOptions;
+use App\Models\Forms;
+use App\Models\FormSection;
 use Redirect,Response;
 use Illuminate\Support\Facades\Validator;
 
@@ -29,9 +31,11 @@ class FormItemOptionController extends Controller
      */
     public function create()
     {
+        $forms = Forms::get();
+        $formsections = FormSection::get();
         $formitems = FormItem::get();
         $masterformoptions = masterFormOptions::get();
-        return view('form_item_options.create',compact('formitems','masterformoptions'));
+        return view('form_item_options.create',compact('formitems','masterformoptions','forms','formsections'));
     }
 
     /**
@@ -123,5 +127,29 @@ class FormItemOptionController extends Controller
         $formitemoptions->delete();
 
         return Response::json(array('success' => true), 200); 
+    }
+
+    public function getFormTitle($formId){
+        $formtitles = FormSection::where(['form_id'=>$formId])->get();
+        $returndata = [];
+        foreach($formtitles as $formtitle){
+            $returndata[] = [
+                'id' => $formtitle->id,
+                'title' => $formtitle->section_title,
+            ];
+        }
+        return Response::json($returndata,200);
+    }
+
+    public function getSectionTitle($SectionId){
+        $formsections = FormItem::where(['section_id'=>$SectionId])->get();
+        $returndata = [];
+        foreach($formsections as $formsection){
+            $returndata[] = [
+                'id' => $formsection->id,
+                'title' => $formsection->title,
+            ];
+        }
+        return Response::json($returndata,200);
     }
 }

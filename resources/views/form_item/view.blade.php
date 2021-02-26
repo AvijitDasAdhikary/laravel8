@@ -24,6 +24,7 @@
                 <table class="table table-hover table-sm table-bordered mt-5" id="formItemListView">
                     <thead>
                         <tr>
+                            <th class="bg-info">Form Title</th>
                             <th class="bg-info">Section Title</th>
                             <th class="bg-info">Form Item</th>
                             <th class="bg-info">Point</th>
@@ -37,6 +38,7 @@
                     <tbody>
                         @foreach($formitems as $formitem)
                             <tr>
+                                <td>{{ App\Models\Forms::where(['id'=>$formitem->formSectionId->id])->first()->title }}</td>
                                 <td>{{ $formitem->formSectionId->section_title }}</td>
                                 <td>{{ $formitem->title }}</td>
                                 <td>{{ $formitem->points }}</td>
@@ -100,7 +102,7 @@
             $('#formItemListView').DataTable({
                 responsive: true,
                 columnDefs: [
-                    { orderable: false, targets: 7 }
+                    { orderable: false, targets: 8 }
                 ]
             });
         });
