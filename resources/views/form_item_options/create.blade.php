@@ -132,8 +132,7 @@
         $(function () {
             $('.select2').select2()
         });
-    </script>
-    <script>
+    
         function getFormTitle(formId){
             $.ajaxSetup({
                 headers: {
