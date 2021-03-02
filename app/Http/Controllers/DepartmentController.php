@@ -40,8 +40,8 @@ class DepartmentController extends Controller
     public function store(Request $request)
     {
         Validator::make($request->all(),[
-            'departmentName' => 'required',
-            'departmentAlias' => 'required',
+            'departmentName' => 'required|unique:departments,name',
+            'departmentAlias' => 'required|unique:departments,alias',
             'departmentDescription' => 'required',
         ])->validate();
 
@@ -88,8 +88,8 @@ class DepartmentController extends Controller
     public function update(Request $request, $id)
     {
         Validator::make($request->all(),[
-            'departmentName' => 'required',
-            'departmentAlias' => 'required',
+            'departmentName' => 'required|unique:departments,name',
+            'departmentAlias' => 'required|unique:departments,alias',
             'departmentDescription' => 'required',
         ])->validate();
 

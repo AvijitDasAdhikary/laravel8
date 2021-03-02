@@ -35,23 +35,7 @@
                         @foreach($masterformoptions as $masterformoption)
                             <tr>
                                 <td>
-                                    @php
-                                        if($masterformoption->label == 'YES')
-                                            $btnClass = "success";
-                                        elseif($masterformoption->label == 'NO')
-                                            $btnClass = "danger";
-                                        elseif($masterformoption->label == 'OUT')
-                                            $btnClass = "danger";
-                                        elseif($masterformoption->label == 'IN')
-                                            $btnClass = "success";
-                                        elseif($masterformoption->label == 'COS')
-                                            $btnClass = "warning";
-                                        elseif($masterformoption->label == 'R')
-                                            $btnClass = "secondary";
-                                        elseif($masterformoption->label == 'DEF')
-                                            $btnClass = "info";
-                                    @endphp
-                                    <span class="btn btn-{{$btnClass}} btn-sm btn-flat rounded-0">{{$masterformoption->label}}</span>
+                                    <span class="btn btn-{{strToLower($masterformoption->color_class)}} btn-sm btn-flat rounded-0">{{$masterformoption->label}}</span>
                                 </td>
                                 <td>
                                     <button class="btn btn-flat btn-md w-50" style="background-color: {{ $masterformoption->color_code }}"></button>

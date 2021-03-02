@@ -46,6 +46,32 @@
                         <div class="row">
                             <div class="col-md-4">
                                 <div class="form-group">
+                                    <label for="masterFormColorClass" class="text-sm">Color Class</label>
+                                    <select name="masterFormColorClass" id="masterFormColorClass" class="form-control form-control-sm rounded-0" required>
+                                        <option value="">Select Color Class</option>
+                                        <option value="Primary" @if($masterformoptions->color_class == 'Primary') 
+                                        {{ 'selected' }} @endif>Primary</option>
+                                        <option value="Danger" @if($masterformoptions->color_class == 'Danger') 
+                                        {{ 'selected' }} @endif>Danger</option>
+                                        <option value="Success" @if($masterformoptions->color_class == 'Success') 
+                                        {{ 'selected' }} @endif>Success</option>
+                                        <option value="Warning" @if($masterformoptions->color_class == 'Warning') 
+                                        {{ 'selected' }} @endif>Warning</option>
+                                        <option value="Info" @if($masterformoptions->color_class == 'Info') 
+                                        {{ 'selected' }} @endif>Info</option>
+                                        <option value="Secondary" @if($masterformoptions->color_class == 'Secondary') 
+                                        {{ 'selected' }} @endif>Secondary</option>
+                                        <option value="Dark" @if($masterformoptions->color_class == 'Dark') 
+                                        {{ 'selected' }} @endif>Dark</option>
+                                        <option value="Light" @if($masterformoptions->color_class == 'Light') 
+                                        {{ 'selected' }} @endif>Light</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="form-group">
                                     <label for="masterFormStatus" class="text-sm">Status</label>
                                     <select name="masterFormStatus" id="masterFormStatus" class="form-control form-control-sm rounded-0">
                                         <option value="1" @if($masterformoptions->is_active == 1) {{ 'selected' }} @endif>Active</option>

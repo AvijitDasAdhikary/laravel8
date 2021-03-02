@@ -50,14 +50,14 @@
                                     <label for="masterFormColorClass" class="text-sm">Color Class</label>
                                     <select name="masterFormColorClass" id="masterFormColorClass"   class="form-control form-control-sm rounded-0">
                                         <option value="">Select Color Class</option>
-                                        <option value="1">Primary</option>
-                                        <option value="2">Secondary</option>
-                                        <option value="3">Success</option>
-                                        <option value="4">Danger</option>
-                                        <option value="5">Warning</option>
-                                        <option value="6">Info</option>
-                                        <option value="7">Dark</option>
-                                        <option value="8">Light</option>
+                                        <option value="Primary">Primary</option>
+                                        <option value="Secondary">Secondary</option>
+                                        <option value="Success">Success</option>
+                                        <option value="Danger">Danger</option>
+                                        <option value="Warning">Warning</option>
+                                        <option value="Info">Info</option>
+                                        <option value="Dark">Dark</option>
+                                        <option value="Light">Light</option>
                                     </select>
                                 </div>
                             </div>

@@ -50,6 +50,7 @@ class MasterFormOptionsController extends Controller
 
         $masterformoptions = new masterFormOptions();
         $masterformoptions->label = $request->masterFormLabel;
+        $masterformoptions->color_class = $request->masterFormColorClass;
         $masterformoptions->color_code = $request->inputColorCode;
         $masterformoptions->is_active  = $request->masterFormStatus;
         $masterformoptions->save();
@@ -99,6 +100,7 @@ class MasterFormOptionsController extends Controller
         
         $masterformoptions = masterFormOptions::findOrFail($id);
         $masterformoptions->label = $request->masterFormLabel;
+        $masterformoptions->color_class = $request->masterFormColorClass;
         $masterformoptions->color_code = $request->inputColorCode;
         $masterformoptions->is_active = $request->masterFormStatus;
         $masterformoptions->save();

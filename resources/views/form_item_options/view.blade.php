@@ -35,23 +35,7 @@
                             <tr>
                                 <td>{{ $formitemoption->ItemId->title }}</td>
                                 <td>
-                                    @php
-                                        if($formitemoption->OptionId['label'] == 'YES')
-                                            $btnClass = "success";
-                                        elseif($formitemoption->OptionId['label'] == 'NO')
-                                            $btnClass = "danger";
-                                        elseif($formitemoption->OptionId['label'] == 'OUT')
-                                            $btnClass = "danger";
-                                        elseif($formitemoption->OptionId['label'] == 'IN')
-                                            $btnClass = "success";
-                                        elseif($formitemoption->OptionId['label'] == 'COS')
-                                            $btnClass = "warning";
-                                        elseif($formitemoption->OptionId['label'] == 'R')
-                                            $btnClass = "secondary";
-                                        elseif($formitemoption->OptionId['label'] == 'DEF')
-                                            $btnClass = "info";
-                                    @endphp
-                                    <span class="btn btn-{{ $btnClass }} btn-sm btn-flat rounded-0">{{ $formitemoption->OptionId['label'] }}</span>
+                                    <span class="btn btn-{{strToLower($formitemoption->OptionId->color_class)}} btn-sm btn-flat rounded-0">{{ $formitemoption->OptionId['label'] }}</span>
                                 </td>
                                 <td>
                                     @if($formitemoption->is_active == 1)
