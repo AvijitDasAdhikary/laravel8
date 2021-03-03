@@ -51,11 +51,56 @@
                                 <td>
                                     <a href="/masterformoptions/{{ $masterformoption->id }}/edit" class="btn btn-sm btn-primary rounded-0">Edit</a>
                                     <button type="button" class="btn btn-sm btn-danger rounded-0" onclick="deletedData({{ $masterformoption->id }});">Delete</button>
+                                    <button type="button" class="btn btn-sm btn-warning rounded-0" onclick="previewMasterFormOptionData({{ $masterformoption->id }});">Preview</button>
                                 </td>
                             </tr>
                         @endforeach 
                     </tbody>
                 </table>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="masterFormOptionPreview">
+        <div class="modal-dialog">
+            <div class="modal-content rounded-0">
+                <div class="modal-header" style="background-color: goldenrod; height: 60px;">
+                    <h4 class="modal-title">Master Form Option Information</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form role="form">
+                        <div class="row">
+                            <div class="col-md-8">
+                                <div class="form-group">
+                                    <label for="masterFormLabel">Label</label>
+                                    <input type="text" name="masterFormLabel" id="masterFormLabel" class="form-control rounded-0" readonly="readonly" value="">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-8">
+                                <div class="form-group">
+                                    <label for="inputColorCode">Color Code</label>
+                                    <input type="text" name="inputColorCode" class="form-control rounded-0" id="inputColorCode" readonly="readonly" value="">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-8">
+                                <div class="form-group">
+                                    <label for="masterFormColorClass">Color Class</label>
+                                    <input type="text" name="masterFormColorClass" class="form-control rounded-0" id="masterFormColorClass" readonly="readonly" value="">
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default btn-m btn-flat rounded-0" data-dismiss="modal">Close</button>
+                </div>
             </div>
         </div>
     </div>
@@ -118,6 +163,28 @@
                     });
                 }
             });
+        }
+
+        function previewMasterFormOptionData(id){
+
+            var formData = new FormData();
+            formData.append('id', id);
+            $.ajax({
+                url: "/masterformoptions/"+id,
+                type: "GET",
+                data: formData,
+                contentType: false,
+                processData: false,
+                dataType:'json',
+                success: function (response) {
+                    if(response.success){
+                        $('#masterFormLabel').val(''+response.masterformoptions.label);
+                        $('#inputColorCode').val(''+response.masterformoptions.color_code);
+                        $('#masterFormColorClass').val(''+response.masterformoptions.color_class);
+                    }
+                },
+            });
+            $('#masterFormOptionPreview').modal('show');
         }
     </script>
 @stop

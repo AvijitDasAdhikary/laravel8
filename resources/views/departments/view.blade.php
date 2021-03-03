@@ -48,6 +48,7 @@
                                 <td>
                                     <a href="/departments/{{ $department->id }}/edit" class="btn btn-sm btn-primary rounded-0">Edit</a>
                                     <button type="button" class="btn btn-sm btn-danger rounded-0" onclick="deletedData({{ $department->id }});">Delete</button>
+                                    <button type="button" class="btn btn-sm btn-warning rounded-0" onclick="previewDepartmentData({{ $department->id }});">Preview</button>
                                 </td>
                             </tr>
                         @endforeach 
@@ -56,6 +57,52 @@
             </div>
         </div>
     </div>
+    
+    <!-- Department Preview Modal Starts -->
+        <div class="modal fade" id="departmentPreview">
+            <div class="modal-dialog">
+                <div class="modal-content rounded-0">
+                    <div class="modal-header" style="background-color: goldenrod; height: 60px;">
+                        <h4 class="modal-title">Department Information</h4>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <form role="form">
+                            <div class="row">
+                                <div class="col-md-8">
+                                    <div class="form-group">
+                                        <label for="departmentName">Name</label>
+                                        <input type="text" name="departmentName" id="departmentName" class="form-control rounded-0" readonly="readonly" value="">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-8">
+                                    <div class="form-group">
+                                        <label for="departmentAlias">Alias</label>
+                                        <input type="text" name="departmentAlias" class="form-control rounded-0" id="departmentAlias" readonly="readonly" value="">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-8">
+                                    <div class="form-group">
+                                        <label for="departmentDescription">Description</label>
+                                        <textarea name="departmentDescription" id="departmentDescription" cols="5" rows="3" class="form-control rounded-0" readonly="readonly" value=""></textarea>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default btn-m btn-flat rounded-0" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    <!-- Department Preview Modal Ends -->
 @stop
 
 @section('css')
@@ -78,7 +125,6 @@
             $('#departmentListView').DataTable({
                 responsive: true,
                 columnDefs: [
-                    { orderable: false, targets: 3 },
                     { orderable: false, targets: 4 }
                 ]
             });
@@ -117,5 +163,30 @@
                 }
             });
         }
+
+        function previewDepartmentData(id){
+
+            var formData = new FormData();
+            formData.append('id', id);
+            $.ajax({
+                url: "/departments/"+id,
+                type: "GET",
+                data: formData,
+                contentType: false,
+                processData: false,
+                dataType:'json',
+                success: function (response) {
+                    if(response.success){
+                        // let name = (response.departments.name == null) ? '' : response.departments.name;
+                        // let alias = (response.departments.alias == null) ? '' : response.departments.alias;
+                        let description = (response.departments.description == null) ? '' : response.departments.description;
+                        $('#departmentName').val(''+response.departments.name);
+                        $('#departmentAlias').val(''+response.departments.alias);
+                        $('#departmentDescription').val(''+description);
+                    }
+                },
+            });
+			$('#departmentPreview').modal('show');
+		}
     </script>
 @stop

@@ -64,9 +64,13 @@ class MasterFormOptionsController extends Controller
      * @param  \App\Models\masterFormOptions  $masterFormOptions
      * @return \Illuminate\Http\Response
      */
-    public function show(masterFormOptions $masterFormOptions)
+    public function show($id)
     {
-        //
+        $masterformoptions = masterFormOptions::findOrFail($id);
+        return Response::json(array(
+            'success' => true,
+            'masterformoptions' => $masterformoptions,
+        ), 200);
     }
 
     /**

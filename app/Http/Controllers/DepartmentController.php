@@ -42,7 +42,6 @@ class DepartmentController extends Controller
         Validator::make($request->all(),[
             'departmentName' => 'required|unique:departments,name',
             'departmentAlias' => 'required|unique:departments,alias',
-            'departmentDescription' => 'required',
         ])->validate();
 
         $departments = new Department();
@@ -63,7 +62,11 @@ class DepartmentController extends Controller
      */
     public function show($id)
     {
-        //
+        $departments = Department::findOrFail($id);
+        return Response::json(array(
+            'success' => true,
+            'departments' => $departments,
+        ), 200);
     }
 
     /**
