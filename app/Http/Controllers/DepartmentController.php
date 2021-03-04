@@ -91,8 +91,8 @@ class DepartmentController extends Controller
     public function update(Request $request, $id)
     {
         Validator::make($request->all(),[
-            'departmentName' => 'required|unique:departments,name',
-            'departmentAlias' => 'required|unique:departments,alias',
+            'departmentName' => 'required|unique:departments,name,'.$id,
+            'departmentAlias' => 'required|unique:departments,alias,'.$id,
             'departmentDescription' => 'required',
         ])->validate();
 

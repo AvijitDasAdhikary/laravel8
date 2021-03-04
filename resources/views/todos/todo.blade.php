@@ -20,7 +20,7 @@
 
 @section('content')
     <div class="col-12">
-        <div class="card rounded-0">
+        <div class="card card-info card-outline rounded-0">
             <div class="card-body">
                 <!-- <div class="container mt-0"> -->
                     <!-- <h4>Select Number of Rows</h4>

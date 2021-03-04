@@ -20,7 +20,7 @@
 
 @section('content')
     <div class="col-12">
-        <div class="card rounded-0">
+        <div class="card card-info card-outline rounded-0">
             <div class="card-body">
                 <table class="table table-sm table-bordered table-hover mt-5" id="formCodeListView">
                     <thead>

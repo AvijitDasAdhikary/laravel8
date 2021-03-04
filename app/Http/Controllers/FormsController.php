@@ -91,7 +91,7 @@ class FormsController extends Controller
     {
         validator::make($request->all(),[
             'department' => 'required',
-            'formTitle' => 'required',
+            'formTitle' => 'required|unique:forms,title,'.$id,
             'formsDescription' => 'required',
         ])->validate();
         

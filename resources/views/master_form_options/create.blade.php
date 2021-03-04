@@ -37,12 +37,12 @@
                                     @enderror
                                 </div>
                             </div>
-                            <div class="col-md-2 col-sm-12 col-xs-12">
+                            <!-- <div class="col-md-2 col-sm-12 col-xs-12">
                                 <div class="form-group">
                                     <label for="inputColorCode" class="text-sm">Select Color</label>
                                     <input type="text" class="form-control form-control-sm text-sm rounded-0" name="inputColorCode" id="inputColorCode" required>
                                 </div>
-                            </div>
+                            </div> -->
                         </div>
                         <div class="row">
                             <div class="col-md-4">
@@ -59,6 +59,19 @@
                                         <option value="Dark">Dark</option>
                                         <option value="Light">Light</option>
                                     </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="inputColorCode" class="text-sm">Select Color</label>
+                                    <div class="input-group inputColorCode">
+                                        <input type="text" class="form-control form-control-sm text-sm rounded-0" name="inputColorCode" id="inputColorCode" required>
+                                        <div class="input-group-append">
+                                            <span class="input-group-text"><i class="fas fa-square"></i></span>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -133,7 +146,7 @@
                 ]
             }).on('colorpickerChange colorpickerCreate', function(e){
                 var code = e.color.toString('hex');
-                $('#inputColorCode').css({'background-color': code,'color': 'transparent'});
+                $('.inputColorCode .fa-square').css({'background-color': code,'color': 'transparent'});
             })
         });
     </script>

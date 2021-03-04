@@ -36,12 +36,12 @@
                                     @enderror
                                 </div>
                             </div>
-                            <div class="col-md-2 col-sm-12 col-xs-12">
+                            <!-- <div class="col-md-2 col-sm-12 col-xs-12">
                                 <div class="form-group">
                                     <label for="inputColorCode" class="text-sm">Select Color</label>
                                     <input type="text" class="form-control form-control-sm text-sm rounded-0" name="inputColorCode" id="inputColorCode" value="{{ $masterformoptions->color_code }}" required>
                                 </div>
-                            </div>
+                            </div> -->
                         </div>
                         <div class="row">
                             <div class="col-md-4">
@@ -72,37 +72,24 @@
                         <div class="row">
                             <div class="col-md-4">
                                 <div class="form-group">
+                                    <label for="inputColorCode" class="text-sm">Select Color</label>
+                                    <div class="input-group inputColorCode">
+                                        <input type="text" class="form-control form-control-sm text-sm rounded-0" name="inputColorCode" id="inputColorCode" value="{{ $masterformoptions->color_code }}" required>
+                                        <div class="input-group-append">
+                                            <span class="input-group-text"><i class="fas fa-square"></i></span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="form-group">
                                     <label for="masterFormStatus" class="text-sm">Status</label>
                                     <select name="masterFormStatus" id="masterFormStatus" class="form-control form-control-sm rounded-0">
                                         <option value="1" @if($masterformoptions->is_active == 1) {{ 'selected' }} @endif>Active</option>
                                         <option value="0" @if($masterformoptions->is_active == 0) {{ 'selected' }} @endif>Inactive</option>
                                     </select>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-6 text-bold rounded-0 p-2 d-none" id="addDepartmentProcessMsgBox">
-                                <div class="alert alert-dismissable alert-info">
-                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                        <span aria-hidden="true">&times;</span>
-                                    </button>
-                                    <strong>Processing ...</strong>
-                                </div>
-                            </div>
-                            <div class="col-md-6 text-bold rounded-0 p-2 d-none" id="addDepartmentSuccessMsgBox">
-                                <div class="alert alert-dismissable alert-success">
-                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                        <span aria-hidden="true">&times;</span>
-                                    </button>
-                                    <strong>Department Updated Successfully.</strong>
-                                </div>
-                            </div>
-                            <div class="col-md-6 text-bold rounded-0 p-2 d-none" id="addDepartmentErrorMsgBox">
-                                <div class="alert alert-dismissable alert-danger">
-                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                        <span aria-hidden="true">&times;</span>
-                                    </button>
-                                    <strong>Error Occurred. Try Again Later.</strong>
                                 </div>
                             </div>
                         </div>
@@ -153,7 +140,7 @@
                 ]
             }).on('colorpickerChange colorpickerCreate', function(e){
                 var code = e.color.toString('hex');
-                $('#inputColorCode').css({'background-color': code,'color': 'transparent'});
+                $('.inputColorCode .fa-square').css({'background-color': code,'color': 'transparent'});            
             })
         });
     </script>

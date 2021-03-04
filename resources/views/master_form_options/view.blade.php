@@ -20,7 +20,7 @@
 
 @section('content')
     <div class="col-12">
-        <div class="card rounded-0">
+        <div class="card card-info card-outline rounded-0">
             <div class="card-body">
                 <table class="table table-sm table-bordered table-hover mt-5" id="masterformoptionListView">
                     <thead>
@@ -167,7 +167,7 @@
 
         function previewMasterFormOptionData(id){
 
-            var formData = new FormData();
+            let formData = new FormData();
             formData.append('id', id);
             $.ajax({
                 url: "/masterformoptions/"+id,
