@@ -145,4 +145,16 @@ class FormItemCodeController extends Controller
         }
         return Response::json($returndata,200);
     }
+
+    public function getformItemTitle($CodeId){
+        $formcodes = FormCodes::where(['id'=>$CodeId])->get();
+        $returndata = [];
+        foreach($formcodes as $formcode){
+            $returndata[] = [
+                'id' => $formcode->id,
+                'form_code' => $formcode->form_code,
+            ];
+        }
+        return Response::json($returndata,200);
+    }
 }

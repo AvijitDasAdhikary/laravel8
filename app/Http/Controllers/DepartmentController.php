@@ -93,7 +93,7 @@ class DepartmentController extends Controller
         Validator::make($request->all(),[
             'departmentName' => 'required|unique:departments,name,'.$id,
             'departmentAlias' => 'required|unique:departments,alias,'.$id,
-            'departmentDescription' => 'required',
+             // 'departmentDescription' => 'required',
         ])->validate();
 
         $departments = Department::findOrFail($id);

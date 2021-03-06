@@ -60,8 +60,8 @@
                             <div class="col-md-4">
                                 <div class="form-group">
                                 <label for="formItemTitle" class="text-sm">Item Title</label>
-                                    <select name="formItemTitle" id="formItemTitle" class="form-control form-control-sm rounded-0" onChange="getItemTitle(this.value)" required>
-                                        <option value="">Select Item</option>
+                                    <select name="formItemTitle" id="formItemTitle" class="form-control form-control-sm rounded-0" onChange="getformItemTitle(this.value)" required>
+                                        <option value="">Select Item Title</option>
                                         
                                     </select>
                                     @error('formItemTitle')
@@ -76,10 +76,7 @@
                                     <label for="formCode" class="text-sm">Code</label>
                                     <select name="formCode" id="formCode" class="form-control form-control-sm rounded-0">
                                         <option value="">Select Code</option>
-                                        @foreach($formcodes as $formcode)
-                                            <option value="{{$formcode->id}}">
-                                            {{$formcode->form_code}}</option>
-                                        @endforeach
+                                        
                                     </select>
                                     @error('formCode')
                                         <div class="alert-danger">{{ $message }}</div>
@@ -171,6 +168,29 @@
                         option +='<option value="'+el.id+'">'+el.title+'</option>';
                     })
                     $("#formItemTitle").append(option);
+                }
+            })
+        }
+
+        function getformItemTitle(CodeId){
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+
+            $("#formCode").html(" ");
+            $.ajax({
+                url: "{{url('formitemcodes/create/formCode')}}/"+CodeId,
+                type: "POST",
+                contentType: false,
+                processData: false,
+                success: function(response){
+                    var option = '<option value="">Select Code</option>';
+                    response.map(function(el){
+                        option +='<option value="'+el.id+'">'+el.form_code+'</option>';
+                    })
+                    $("#formCode").append(option);
                 }
             })
         }

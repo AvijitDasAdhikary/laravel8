@@ -53,9 +53,7 @@
                                 <div class="form-group">
                                     <label for="departmentDescription" class="text-sm">Description</label>
                                     <textarea name="departmentDescription" id="departmentDescription" cols="5" rows="3" class="form-control form-control-sm rounded-0">{{ $departments->description }}</textarea>
-                                    @error('departmentDescription')
-                                        <div class="alert-danger">{{ $message }}</div>
-                                    @enderror
+                                    
                                 </div>
                             </div>
                         </div>
