@@ -67,7 +67,7 @@
                                 <div class="form-group">
                                     <label for="inputColorCode" class="text-sm">Select Color</label>
                                     <div class="input-group inputColorCode">
-                                        <input type="text" class="form-control form-control-sm text-sm rounded-0" name="inputColorCode" id="inputColorCode" required>
+                                        <input type="text" class="form-control form-control-sm text-sm rounded-0" name="inputColorCode" id="inputColorCode" placeholder="Select Color" required>
                                         <div class="input-group-append">
                                             <span class="input-group-text"><i class="fas fa-square"></i></span>
                                         </div>
