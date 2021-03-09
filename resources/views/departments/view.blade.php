@@ -22,7 +22,7 @@
     <div class="col-12">
         <div class="card card-info card-outline rounded-0">
             <div class="card-body">
-                <table class="table table-sm table-bordered table-hover mt-5" id="departmentListView">
+                <table class="table table-sm table-bordered table-striped" id="departmentListView">
                     <thead>
                         <tr>
                             <th class="bg-info">Name</th>
@@ -97,7 +97,7 @@
                         </form>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-default btn-m btn-flat rounded-0" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-danger btn-m btn-flat rounded-0" data-dismiss="modal">Close</button>
                     </div>
                 </div>
             </div>

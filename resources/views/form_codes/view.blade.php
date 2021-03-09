@@ -22,7 +22,7 @@
     <div class="col-12">
         <div class="card card-info card-outline rounded-0">
             <div class="card-body">
-                <table class="table table-sm table-bordered table-hover mt-5" id="formCodeListView">
+                <table class="table table-sm table-bordered table-striped" id="formCodeListView">
                     <thead>
                         <tr>
                             <th class="bg-info">Department</th>

@@ -21,7 +21,7 @@
     <div class="col-12">
         <div class="card card-info card-outline rounded-0">
             <div class="card-body">
-                <table class="table table-hover table-sm table-bordered mt-5" id="formItemCodeListView">
+                <table class="table table-striped table-sm table-bordered" id="formItemCodeListView">
                     <thead>
                         <tr>
                             <th class="bg-info">Item</th>

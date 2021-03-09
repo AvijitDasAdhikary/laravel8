@@ -21,12 +21,11 @@
     <div class="col-12">
         <div class="card card-info card-outline rounded-0">
             <div class="card-body">
-                <table class="table table-hover table-sm table-bordered mt-5" id="formSectionListView">
+                <table class="table table-striped table-sm table-bordered" id="formSectionListView">
                     <thead>
                         <tr>
                             <th class="bg-info">Form Title</th>
                             <th class="bg-info">Section Title</th>
-                            <th class="bg-info">Parent ID</th>
                             <th class="bg-info">Status</th>
                             <th class="bg-info">Action</th>
                         </tr>
@@ -36,7 +35,6 @@
                         <tr>
                             <td>{{ $formsection->formId->title }}</td>
                             <td>{{ $formsection->section_title }}</td>
-                            <td>{{ $formsection->parent_id }}</td>
                             <td>
                                 @if($formsection->is_active == 1)
                                     <span class="btn btn-success btn-sm rounded-0">Active</span>
@@ -76,7 +74,7 @@
             $('#formSectionListView').DataTable({
                 responsive: true,
                 columnDefs: [
-                    { orderable: false, targets: 4 }
+                    { orderable: false, targets: 3 }
                 ]
             });
         });
